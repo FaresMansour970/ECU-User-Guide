@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل المستخدم الكامل — ECU Intelligence Pro v5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b14;--bg2:#0b1120;--bg3:#101828;--card:#0d1525;
+  --border:#1c2d47;--border2:#0f1e35;
+  --accent:#f97316;--accent2:#fb923c;--accentd:#c2410c;
+  --blue:#3b82f6;--blue2:#60a5fa;--green:#22c55e;--green2:#4ade80;
+  --purple:#8b5cf6;--yellow:#f59e0b;--red:#ef4444;--teal:#14b8a6;
+  --text:#dde8f8;--text2:#7b93b8;--text3:#3d5470;--text4:#1e3352;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Cairo','Tajawal',sans-serif;
+  --display:'Orbitron',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);direction:rtl;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+/* ── TOP BAR ── */
+#topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:58px;
+  background:rgba(7,11,20,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;padding:0 2%;gap:16px;
+}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.tb-icon{
+  width:34px;height:34px;background:var(--accent);border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:14px;font-weight:900;color:#fff;
+}
+.tb-title{font-family:var(--display);font-size:12px;font-weight:700;color:var(--text);letter-spacing:.05em}
+.tb-title span{color:var(--accent)}
+.tb-badge{
+  padding:3px 10px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.3);
+  border-radius:100px;font-family:var(--mono);font-size:10px;color:var(--accent);
+  letter-spacing:.06em;flex-shrink:0;
+}
+.tb-search{
+  flex:1;max-width:360px;margin-right:auto;
+  position:relative;
+}
+.tb-search input{
+  width:100%;padding:7px 12px 7px 36px;
+  background:var(--bg3);border:1px solid var(--border2);border-radius:7px;
+  color:var(--text);font-family:var(--sans);font-size:13px;
+  outline:none;transition:border-color .2s;
+}
+.tb-search input:focus{border-color:var(--accent)}
+.tb-search input::placeholder{color:var(--text3)}
+.tb-search-icon{
+  position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  color:var(--text3);font-size:14px;
+}
+.tb-progress{
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.tb-progress-bar{
+  width:100px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;
+}
+.tb-progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));
+  border-radius:2px;width:0%;transition:width .3s;
+}
+
+/* ── LAYOUT ── */
+#layout{display:flex;min-height:100vh;padding-top:58px}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:270px;flex-shrink:0;
+  background:var(--bg2);border-left:1px solid var(--border2);
+  position:fixed;top:58px;right:0;bottom:0;
+  overflow-y:auto;z-index:100;
+  padding:16px 0 40px;
+}
+.sb-section{margin-bottom:4px}
+.sb-section-title{
+  font-family:var(--mono);font-size:9px;font-weight:600;
+  color:var(--text3);letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 18px 6px;
+}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 18px;
+  font-size:13px;color:var(--text2);
+  text-decoration:none;cursor:pointer;
+  transition:background .15s,color .15s;
+  border-right:2px solid transparent;
+  line-height:1.35;
+}
+.sb-item:hover{background:rgba(255,255,255,.03);color:var(--text)}
+.sb-item.active{
+  background:rgba(249,115,22,.07);color:var(--accent);
+  border-right-color:var(--accent);
+}
+.sb-item .sb-num{
+  font-family:var(--mono);font-size:9px;color:var(--text3);
+  flex-shrink:0;width:22px;
+}
+.sb-item .sb-check{
+  font-size:10px;margin-right:auto;flex-shrink:0;
+  opacity:0;transition:opacity .2s;color:var(--green);
+}
+.sb-item.done .sb-check{opacity:1}
+.sb-divider{height:1px;background:var(--border2);margin:8px 18px}
+
+/* ── MAIN CONTENT ── */
+#main{
+  margin-right:270px;flex:1;min-width:0;
+  padding:0 0 120px;
+}
+
+/* ── HERO DOC HEADER ── */
+.doc-hero{
+  background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%);
+  border-bottom:1px solid var(--border2);
+  padding:48px 52px 40px;
+  position:relative;overflow:hidden;
+}
+.doc-hero::before{
+  content:'';position:absolute;top:-80px;left:-80px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(249,115,22,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.doc-hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;
+  background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);
+  border-radius:100px;margin-bottom:18px;
+}
+.doc-hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.doc-hero-badge span{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.07em}
+.doc-hero h1{
+  font-family:var(--display);font-size:clamp(24px,3vw,36px);
+  font-weight:900;color:var(--text);letter-spacing:-.02em;
+  margin-bottom:10px;line-height:1.15;
+}
+.doc-hero h1 em{color:var(--accent);font-style:normal}
+.doc-hero p{font-size:15px;color:var(--text2);max-width:640px;line-height:1.7;margin-bottom:24px}
+.doc-stats-row{display:flex;gap:28px;flex-wrap:wrap}
+.doc-stat{
+  padding:12px 18px;background:var(--card);border:1px solid var(--border2);
+  border-radius:9px;text-align:center;min-width:90px;
+}
+.doc-stat-val{font-family:var(--display);font-size:22px;font-weight:900;color:var(--accent);display:block}
+.doc-stat-lbl{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em}
+
+/* ── SECTION WRAPPERS ── */
+.doc-section{padding:52px 52px 0;scroll-margin-top:70px}
+.doc-section:last-child{padding-bottom:52px}
+
+.section-number{
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  letter-spacing:.1em;margin-bottom:8px;display:block;
+}
+.section-title{
+  font-family:var(--display);font-size:clamp(20px,2.5vw,28px);
+  font-weight:900;color:var(--text);letter-spacing:-.02em;
+  margin-bottom:8px;line-height:1.2;
+}
+.section-title em{color:var(--accent);font-style:normal}
+.section-intro{
+  font-size:14px;color:var(--text2);line-height:1.75;
+  max-width:700px;margin-bottom:36px;
+  padding-bottom:24px;border-bottom:1px solid var(--border2);
+}
+.section-divider{height:1px;background:var(--border2);margin:48px 0}
+
+/* ── STEP CARDS ── */
+.steps-list{display:flex;flex-direction:column;gap:24px}
+.step-card{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:12px;overflow:hidden;
+  transition:border-color .25s;
+}
+.step-card:hover{border-color:var(--border)}
+.step-header{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:22px 24px 20px;cursor:pointer;
+}
+.step-num{
+  width:36px;height:36px;flex-shrink:0;
+  background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.2);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:13px;font-weight:900;color:var(--accent);
+}
+.step-info{flex:1}
+.step-title{
+  font-size:16px;font-weight:700;color:var(--text);
+  margin-bottom:4px;line-height:1.3;
+}
+.step-subtitle{font-size:12px;color:var(--text2)}
+.step-expand{
+  font-size:18px;color:var(--text3);
+  transition:transform .25s;flex-shrink:0;margin-top:2px;
+}
+.step-card.open .step-expand{transform:rotate(180deg)}
+.step-body{
+  border-top:1px solid var(--border2);
+  padding:24px;
+  display:none;
+}
+.step-card.open .step-body{display:block}
+
+/* ── INFO BOXES ── */
+.info-box{
+  padding:16px 20px;border-radius:9px;margin:16px 0;
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:13px;line-height:1.65;
+}
+.info-box.tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);color:#86efac}
+.info-box.warn{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#fcd34d}
+.info-box.danger{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
+.info-box.info{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);color:#93c5fd}
+.info-box .ib-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.info-box strong{font-weight:700}
+
+/* ── CODE BLOCKS ── */
+.code-block{
+  background:#030712;border:1px solid var(--border2);border-radius:9px;
+  overflow:hidden;margin:16px 0;font-family:var(--mono);font-size:12px;
+  direction:ltr;text-align:left;
+}
+.code-block-header{
+  background:var(--bg3);border-bottom:1px solid var(--border2);
+  padding:8px 14px;display:flex;align-items:center;justify-content:space-between;
+}
+.code-block-lang{font-size:10px;color:var(--text3);letter-spacing:.06em}
+.code-block-copy{
+  font-size:10px;color:var(--text3);cursor:pointer;padding:2px 8px;
+  border:1px solid var(--border2);border-radius:4px;background:transparent;
+  color:var(--text3);transition:color .15s,border-color .15s;
+}
+.code-block-copy:hover{color:var(--accent);border-color:var(--accent)}
+.code-block pre{padding:16px;overflow-x:auto;line-height:1.65;color:#c9d4e8}
+.code-block .kw{color:#93c5fd}
+.code-block .str{color:#86efac}
+.code-block .num{color:#fcd34d}
+.code-block .cmt{color:#3d5470;font-style:italic}
+.code-block .key{color:#c4b5fd}
+
+/* ── TABLES ── */
+.doc-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.doc-table th{
+  background:var(--bg3);color:var(--text2);padding:10px 14px;
+  text-align:right;font-weight:600;border-bottom:1px solid var(--border);
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+}
+.doc-table td{
+  padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text2);
+  vertical-align:top;line-height:1.55;
+}
+.doc-table tr:hover td{background:rgba(255,255,255,.015)}
+.doc-table td:first-child{
+  font-family:var(--mono);font-size:11px;color:var(--accent);
+  white-space:nowrap;font-weight:600;
+}
+
+/* ── TAGS ── */
+.tag{
+  display:inline-block;padding:2px 8px;border-radius:4px;
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.04em;white-space:nowrap;
+}
+.tag-green{background:rgba(34,197,94,.12);color:#86efac}
+.tag-blue{background:rgba(59,130,246,.12);color:#93c5fd}
+.tag-orange{background:rgba(249,115,22,.12);color:#fdba74}
+.tag-purple{background:rgba(139,92,246,.12);color:#c4b5fd}
+.tag-red{background:rgba(239,68,68,.12);color:#fca5a5}
+.tag-yellow{background:rgba(245,158,11,.12);color:#fcd34d}
+.tag-teal{background:rgba(20,184,166,.12);color:#5eead4}
+
+/* ── PIPELINE VISUAL ── */
+.pipeline-visual{
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;padding:24px 0;scrollbar-width:none;
+}
+.pipeline-visual::-webkit-scrollbar{display:none}
+.pv-step{
+  flex:0 0 130px;
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:9px;padding:16px 12px;text-align:center;
+  position:relative;transition:border-color .2s,transform .2s;cursor:default;
+}
+.pv-step:hover{border-color:var(--accent);transform:translateY(-3px)}
+.pv-step:not(:first-child){margin-right:28px}
+.pv-step::before{
+  content:'←';position:absolute;right:-22px;top:50%;
+  transform:translateY(-50%);color:var(--text3);font-size:16px;
+}
+.pv-step:first-child::before{display:none}
+.pv-icon{font-size:22px;margin-bottom:8px}
+.pv-num{font-family:var(--mono);font-size:8px;color:var(--text3);letter-spacing:.08em;margin-bottom:4px}
+.pv-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px}
+.pv-desc{font-size:9px;color:var(--text3);line-height:1.4}
+
+/* ── FEATURE GRID ── */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
+.feat-item{
+  background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:16px;
+}
+.feat-item-icon{font-size:20px;margin-bottom:8px}
+.feat-item-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.feat-item-desc{font-size:11px;color:var(--text2);line-height:1.55}
+
+/* ── SCREENSHOT MOCK ── */
+.mock-window{
+  background:var(--card);border:1px solid var(--border);border-radius:11px;overflow:hidden;
+  margin:20px 0;
+}
+.mock-topbar{
+  background:var(--bg3);border-bottom:1px solid var(--border2);
+  padding:9px 14px;display:flex;align-items:center;gap:8px;
+}
+.mock-dot{width:9px;height:9px;border-radius:50%}
+.mock-bar-title{
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  margin-right:auto;
+}
+.mock-tabs{
+  display:flex;gap:2px;background:var(--bg2);border-radius:5px;
+  padding:3px;margin-bottom:14px;overflow-x:auto;
+}
+.mock-tab{
+  padding:5px 10px;border-radius:4px;font-family:var(--mono);
+  font-size:10px;color:var(--text3);white-space:nowrap;cursor:default;
+}
+.mock-tab.active{background:var(--card);color:var(--accent)}
+.mock-body{padding:16px}
+
+/* ── NUMBERED LIST ── */
+.num-list{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.num-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:9px;padding:14px 16px;
+}
+.num-circle{
+  width:28px;height:28px;flex-shrink:0;border-radius:50%;
+  background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:11px;font-weight:900;color:var(--accent);
+}
+.num-content{}
+.num-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.num-desc{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* ── CHECK LIST ── */
+.check-list{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.check-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--text2);line-height:1.55;
+}
+.check-item::before{content:'✓';color:var(--green);font-size:13px;flex-shrink:0;margin-top:1px}
+.check-item.warn::before{content:'⚠';color:var(--yellow)}
+.check-item.no::before{content:'✗';color:var(--red)}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box{
+  background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(59,130,246,.04));
+  border:1px solid rgba(249,115,22,.2);border-radius:11px;
+  padding:24px 26px;margin:20px 0;
+}
+.highlight-box h4{
+  font-family:var(--display);font-size:14px;font-weight:900;
+  color:var(--accent);margin-bottom:12px;letter-spacing:.02em;
+}
+.highlight-box p{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* ── KEYBOARD SHORTCUT ── */
+kbd{
+  display:inline-block;padding:2px 7px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:4px;
+  font-family:var(--mono);font-size:11px;color:var(--text2);
+  box-shadow:0 2px 0 var(--border2);
+}
+
+/* ── INLINE CODE ── */
+code{
+  font-family:var(--mono);font-size:11px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border2);
+  padding:1px 6px;border-radius:4px;color:var(--accent2);
+}
+
+/* ── ACCORDION FOR FAQ ── */
+.faq-item{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:9px;overflow:hidden;margin-bottom:10px;
+}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  gap:14px;
+}
+.faq-q:hover{background:rgba(255,255,255,.02)}
+.faq-q .fq-arrow{color:var(--text3);font-size:16px;transition:transform .2s;flex-shrink:0}
+.faq-item.open .fq-arrow{transform:rotate(180deg)}
+.faq-a{
+  display:none;padding:0 20px 18px;
+  font-size:13px;color:var(--text2);line-height:1.7;
+  border-top:1px solid var(--border2);padding-top:14px;
+}
+.faq-item.open .faq-a{display:block}
+
+/* ── PROGRESS TRACKER ── */
+.progress-tracker{
+  background:var(--card);border:1px solid var(--border2);border-radius:11px;
+  padding:20px 24px;margin:20px 0;
+}
+.pt-title{
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  letter-spacing:.1em;margin-bottom:14px;
+}
+.pt-steps{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:6px}
+.pt-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex:1;min-width:70px;position:relative;
+}
+.pt-step:not(:last-child)::after{
+  content:'';position:absolute;top:14px;left:-50%;
+  width:100%;height:2px;background:var(--border2);z-index:0;
+}
+.pt-step.done::after{background:var(--green)}
+.pt-step.active::after{background:linear-gradient(90deg,var(--green),var(--border2))}
+.pt-circle{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--bg3);border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);
+  position:relative;z-index:1;
+}
+.pt-step.done .pt-circle{background:rgba(34,197,94,.12);border-color:var(--green);color:var(--green)}
+.pt-step.active .pt-circle{background:rgba(249,115,22,.12);border-color:var(--accent);color:var(--accent)}
+.pt-label{font-size:9px;color:var(--text3);text-align:center;line-height:1.3;max-width:65px}
+.pt-step.active .pt-label{color:var(--accent)}
+.pt-step.done .pt-label{color:var(--green)}
+
+/* ── COMPARISON TABLE ── */
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;
+}
+.cg-col{
+  background:var(--card);border:1px solid var(--border2);border-radius:9px;overflow:hidden;
+}
+.cg-header{
+  padding:12px 16px;border-bottom:1px solid var(--border2);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
+}
+.cg-body{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.cg-row{
+  display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);
+}
+.cg-row::before{content:'✓';color:var(--green);font-size:11px;flex-shrink:0}
+.cg-row.no::before{content:'✗';color:var(--red)}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.reveal.vis{opacity:1;transform:none}
+
+/* ── BACK TO TOP ── */
+#btt{
+  position:fixed;bottom:28px;left:28px;z-index:150;
+  width:40px;height:40px;background:var(--accent);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:#fff;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 16px rgba(249,115,22,.3);
+  text-decoration:none;
+}
+#btt.show{opacity:1;pointer-events:all}
+#btt:hover{transform:translateY(-3px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #sidebar{display:none}
+  #main{margin-right:0}
+  .doc-section,.doc-hero{padding:32px 20px 0}
+  .doc-hero{padding-bottom:28px}
+  .compare-grid{grid-template-columns:1fr}
+  .pt-steps{gap:4px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ TOP BAR ══════ -->
+<div id="topbar">
+  <a href="#" class="tb-logo">
+    <div class="tb-icon">⚙</div>
+    <div class="tb-title">ECU<span>INTEL</span> PRO</div>
+  </a>
+  <div class="tb-badge">دليل المستخدم v5.0</div>
+  <div class="tb-search">
+    <span class="tb-search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="ابحث في الدليل..." autocomplete="off">
+  </div>
+  <div class="tb-progress">
+    <span id="progressLabel">0%</span>
+    <div class="tb-progress-bar"><div class="tb-progress-fill" id="progressFill"></div></div>
+  </div>
+</div>
+
+<!-- ══════ LAYOUT ══════ -->
+<div id="layout">
+
+<!-- ══════ SIDEBAR ══════ -->
+<nav id="sidebar">
+
+  <div class="sb-section">
+    <div class="sb-section-title">البداية</div>
+    <a href="#intro" class="sb-item active" data-section="intro">
+      <span class="sb-num">00</span>مقدمة ونظرة عامة
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#install" class="sb-item" data-section="install">
+      <span class="sb-num">01</span>التثبيت والتشغيل
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#license-act" class="sb-item" data-section="license-act">
+      <span class="sb-num">02</span>تفعيل الترخيص
+      <span class="sb-check">✓</span>
+    </a>
+  </div>
+
+  <div class="sb-divider"></div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">خط الأنابيب — 7 مراحل</div>
+    <a href="#pipeline" class="sb-item" data-section="pipeline">
+      <span class="sb-num">03</span>فهم خط الأنابيب
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#stage1" class="sb-item" data-section="stage1">
+      <span class="sb-num">04</span>المرحلة 1 — SW ID
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#stage2" class="sb-item" data-section="stage2">
+      <span class="sb-num">05</span>المرحلة 2 — Feature Detection
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#stage7" class="sb-item" data-section="stage7">
+      <span class="sb-num">06</span>المرحلة 7 — Diff Learning
+      <span class="sb-check">✓</span>
+    </a>
+  </div>
+
+  <div class="sb-divider"></div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">تبويبات البرنامج</div>
+    <a href="#tab-analysis" class="sb-item" data-section="tab-analysis">
+      <span class="sb-num">07</span>تبويب التحليل
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-fuel" class="sb-item" data-section="tab-fuel">
+      <span class="sb-num">08</span>خرائط الوقود
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-boost" class="sb-item" data-section="tab-boost">
+      <span class="sb-num">09</span>خريطة الضغط Boost
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-tune" class="sb-item" data-section="tab-tune">
+      <span class="sb-num">10</span>DPF / EGR / IMMO / Tune
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-patch" class="sb-item" data-section="tab-patch">
+      <span class="sb-num">11</span>Patch Manager
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-obd" class="sb-item" data-section="tab-obd">
+      <span class="sb-num">12</span>OBD / CAN
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-pops" class="sb-item" data-section="tab-pops">
+      <span class="sb-num">13</span>Pops &amp; Bangs
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-diff" class="sb-item" data-section="tab-diff">
+      <span class="sb-num">14</span>BIN Diff Viewer
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-script" class="sb-item" data-section="tab-script">
+      <span class="sb-num">15</span>Script Engine
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-difflearn" class="sb-item" data-section="tab-difflearn">
+      <span class="sb-num">16</span>Diff Learning Tab
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-hex" class="sb-item" data-section="tab-hex">
+      <span class="sb-num">17</span>Hex View
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-jobs" class="sb-item" data-section="tab-jobs">
+      <span class="sb-num">18</span>Job Log
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-crm" class="sb-item" data-section="tab-crm">
+      <span class="sb-num">19</span>CRM — العملاء
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#tab-convert" class="sb-item" data-section="tab-convert">
+      <span class="sb-num">20</span>HEX Convert
+      <span class="sb-check">✓</span>
+    </a>
+  </div>
+
+  <div class="sb-divider"></div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">متقدم</div>
+    <a href="#scripts-writing" class="sb-item" data-section="scripts-writing">
+      <span class="sb-num">21</span>كتابة سكريبت مخصص
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#safety" class="sb-item" data-section="safety">
+      <span class="sb-num">22</span>حدود الأمان
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#faq" class="sb-item" data-section="faq">
+      <span class="sb-num">23</span>الأسئلة الشائعة
+      <span class="sb-check">✓</span>
+    </a>
+    <a href="#support-contact" class="sb-item" data-section="support-contact">
+      <span class="sb-num">24</span>التواصل مع الدعم
+      <span class="sb-check">✓</span>
+    </a>
+  </div>
+
+</nav>
+
+<!-- ══════ MAIN ══════ -->
+<main id="main">
+
+<!-- ── DOC HERO ── -->
+<div class="doc-hero">
+  <div class="doc-hero-badge">
+    <span class="doc-hero-badge-dot"></span>
+    <span>الدليل الرسمي الكامل</span>
+  </div>
+  <h1>دليل الاستخدام التفصيلي<br><em>ECU Intelligence Pro v5</em></h1>
+  <p>شرح شامل ومفصل لكل تبويب وميزة وخيار في البرنامج. مناسب للمبتدئين والمحترفين على حد سواء. اقرأ هذا الدليل بالكامل قبل العمل على أي ملف BIN.</p>
+  <div class="doc-stats-row">
+    <div class="doc-stat"><span class="doc-stat-val">24</span><span class="doc-stat-lbl">قسم شرح</span></div>
+    <div class="doc-stat"><span class="doc-stat-val">32+</span><span class="doc-stat-lbl">ECU متغير</span></div>
+    <div class="doc-stat"><span class="doc-stat-val">7</span><span class="doc-stat-lbl">مراحل pipeline</span></div>
+    <div class="doc-stat"><span class="doc-stat-val">15+</span><span class="doc-stat-lbl">تبويب وظيفي</span></div>
+  </div>
+</div>
+
+<!-- ════════ 00 INTRO ════════ -->
+<section id="intro" class="doc-section reveal">
+  <span class="section-number">00 — مقدمة</span>
+  <h2 class="section-title">نظرة عامة على <em>البرنامج</em></h2>
+  <p class="section-intro">
+    ECU Intelligence Pro v5 هو برنامج متخصص لتحليل ومعايرة ملفات BIN الخاصة بوحدات التحكم الإلكترونية (ECU) في السيارات.
+    البرنامج مبني على معمارية 7 مراحل متسلسلة تضمن الدقة والأمان في كل عملية.
+  </p>
+
+  <div class="feat-grid">
+    <div class="feat-item">
+      <div class="feat-item-icon">🔍</div>
+      <div class="feat-item-title">تحليل ملفات BIN</div>
+      <div class="feat-item-desc">قراءة وتحليل ملفات البرمجة الثنائية مع استخراج المعرّف والبصمة الكاملة</div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-item-icon">🎯</div>
+      <div class="feat-item-title">كشف ميزات ECU</div>
+      <div class="feat-item-desc">تحديد وجود DPF/EGR/SCR/IMMO تلقائياً قبل أي تعديل</div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-item-icon">⚡</div>
+      <div class="feat-item-title">ضبط تلقائي Stage 1/2/3</div>
+      <div class="feat-item-desc">تحسين أداء المحرك بثلاث مراحل مع حدود أمان ذكية</div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-item-icon">🧠</div>
+      <div class="feat-item-title">تعلم الفروقات</div>
+      <div class="feat-item-desc">تخزين التعديلات وتوليد سكريبتات تلقائية للاستخدام المستقبلي</div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-item-icon">📜</div>
+      <div class="feat-item-title">محرك السكريبت</div>
+      <div class="feat-item-desc">تنفيذ تعديلات مخصصة بالنمط مع التحقق السياقي</div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-item-icon">👥</div>
+      <div class="feat-item-title">إدارة الأعمال</div>
+      <div class="feat-item-desc">CRM للعملاء وسجل أعمال كامل مع تصدير CSV</div>
+    </div>
+  </div>
+
+  <div class="info-box info">
+    <span class="ib-icon">💡</span>
+    <div><strong>متطلبات النظام:</strong> Windows 10/11 (64-bit) · Python 3.10+ · PyQt6 · ذاكرة 4GB RAM · مساحة 500MB</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 01 INSTALL ════════ -->
+<section id="install" class="doc-section reveal">
+  <span class="section-number">01 — التثبيت والتشغيل</span>
+  <h2 class="section-title">كيفية <em>تشغيل البرنامج</em></h2>
+  <p class="section-intro">البرنامج لا يتطلب تثبيتاً تقليدياً. يعمل مباشرة من مجلده مع Python وPyQt6 مثبتَين على الجهاز.</p>
+
+  <div class="num-list">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">ضع ملفات البرنامج في مجلد واحد</div>
+        <div class="num-desc">ضع جميع ملفات البرنامج (بما فيها <code>ecu_intel_v5.py</code>) في مجلد محدد مثل <code>C:\ECU_Pro\</code>. تأكد من وجود صلاحيات الكتابة على المجلد لأن البرنامج يحتاج لإنشاء قواعد بيانات وملفات خرج.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">تثبيت المتطلبات</div>
+        <div class="num-desc">افتح Command Prompt في مجلد البرنامج ونفّذ الأمر التالي:</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span class="code-block-lang">CMD / PowerShell</span>
+      <button class="code-block-copy" onclick="copyCode(this)">نسخ</button>
+    </div>
+    <pre>pip install PyQt6 pyqt6-qt6 pyqt6-sip</pre>
+  </div>
+
+  <div class="num-list" style="margin-top:0">
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">تشغيل البرنامج</div>
+        <div class="num-desc">من نفس المجلد نفّذ الأمر:</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span class="code-block-lang">CMD</span>
+      <button class="code-block-copy" onclick="copyCode(this)">نسخ</button>
+    </div>
+    <pre>python ecu_intel_v5.py</pre>
+  </div>
+
+  <div class="num-list" style="margin-top:0">
+    <div class="num-item">
+      <div class="num-circle">4</div>
+      <div class="num-content">
+        <div class="num-title">شاشة البداية (Splash Screen)</div>
+        <div class="num-desc">ستظهر شاشة البداية الاحترافية مع تحرك خط الأنابيب السباعي. انتظر حتى تكتمل وتختفي تلقائياً (حوالي 3-4 ثوانٍ). لا تضغط أي شيء خلال هذا الوقت.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">5</div>
+      <div class="num-content">
+        <div class="num-title">شاشة الترخيص</div>
+        <div class="num-desc">إذا لم يكن هناك ترخيص مفعّل، ستظهر نافذة تفعيل الترخيص. انتقل للقسم التالي لمعرفة كيفية التفعيل. إذا كان هناك ترخيص مفعّل مسبقاً، سيفتح البرنامج مباشرة.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box warn">
+    <span class="ib-icon">⚠</span>
+    <div><strong>ملاحظة مهمة:</strong> عند أول تشغيل ينشئ البرنامج تلقائياً المجلدات والقواعد: <code>output/</code> و<code>output/backups/</code> و<code>scripts/</code> وقواعد البيانات <code>.db</code>. لا تحذف هذه الملفات.</div>
+  </div>
+
+  <div class="info-box tip">
+    <span class="ib-icon">✅</span>
+    <div><strong>نصيحة:</strong> أنشئ ملف <code>run.bat</code> في مجلد البرنامج وضع فيه السطر <code>python ecu_intel_v5.py</code> لتشغيله بنقرة مزدوجة دون الحاجة لفتح CMD.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 02 LICENSE ════════ -->
+<section id="license-act" class="doc-section reveal">
+  <span class="section-number">02 — الترخيص</span>
+  <h2 class="section-title">تفعيل <em>الترخيص</em> خطوة بخطوة</h2>
+  <p class="section-intro">الترخيص نظام حماية مرتبط بجهازك. بمجرد التفعيل يُقفل على بصمة جهازك الفريدة ولا يمكن نقله لجهاز آخر دون تواصل مع الدعم.</p>
+
+  <div class="highlight-box">
+    <h4>🔑 كيف تحصل على مفتاح الترخيص؟</h4>
+    <p>تواصل مع فارس منصور على WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>
+    أرسل معه <strong>Machine ID (HWID)</strong> الخاص بجهازك (موجود في نافذة الترخيص وتبويب الدعم الفني).<br>
+    ستتلقى مفتاح ترخيص Base64 تلصقه في حقل التفعيل.</p>
+  </div>
+
+  <div class="num-list">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">ابحث عن Machine ID الخاص بك</div>
+        <div class="num-desc">افتح البرنامج. في نافذة الترخيص ستجد قسم <strong>"Machine ID (HWID)"</strong> يعرض كود مكون من 16 حرف. انقر زر <strong>"نسخ معرّف الجهاز"</strong> لنسخه، ثم أرسله لفارس منصور.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">استلام مفتاح الترخيص</div>
+        <div class="num-desc">ستستلم مفتاحاً طويلاً بتنسيق Base64 يبدأ بـ <code>eyJ...</code>. انسخه كاملاً بدون أي مسافات زائدة.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">لصق المفتاح وتفعيله</div>
+        <div class="num-desc">في نافذة الترخيص، انقر <strong>"لصق من الحافظة"</strong> أو الصق المفتاح يدوياً في الحقل المخصص، ثم انقر <strong>"تفعيل الترخيص"</strong>. ستظهر رسالة خضراء تؤكد التفعيل الناجح.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">4</div>
+      <div class="num-content">
+        <div class="num-title">تأكيد التفعيل</div>
+        <div class="num-desc">بعد التفعيل يُحفظ الترخيص محلياً في قاعدة بيانات <code>licenses.db</code>. في المرات القادمة يفتح البرنامج مباشرة. شريط الحالة في الأعلى يعرض تفاصيل الترخيص واسم الخطة وتاريخ الانتهاء.</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="doc-table">
+    <thead><tr><th>حالة الترخيص</th><th>المعنى</th><th>الحل</th></tr></thead>
+    <tbody>
+      <tr><td>valid</td><td>مفعّل وصالح — النظام يعمل كاملاً</td><td>—</td></tr>
+      <tr><td>expired</td><td>انتهت صلاحيته</td><td>تواصل مع الدعم لتجديده</td></tr>
+      <tr><td>wrong_machine</td><td>مرتبط بجهاز آخر</td><td>أرسل HWID الجديد للدعم</td></tr>
+      <tr><td>invalid_sig</td><td>المفتاح تالف أو مزوّر</td><td>احصل على مفتاح جديد</td></tr>
+      <tr><td>malformed</td><td>تنسيق المفتاح خاطئ</td><td>تأكد من نسخه كاملاً بدون مسافات</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 03 PIPELINE ════════ -->
+<section id="pipeline" class="doc-section reveal">
+  <span class="section-number">03 — خط الأنابيب</span>
+  <h2 class="section-title">فهم <em>خط الأنابيب السباعي</em></h2>
+  <p class="section-intro">كل مرة تضغط "تحليل وضبط تلقائي" يمر ملف BIN عبر 7 مراحل متتالية. فهم هذه المراحل يساعدك على قراءة نتائج التحليل بشكل صحيح.</p>
+
+  <div class="pipeline-visual">
+    <div class="pv-step"><div class="pv-icon">🔍</div><div class="pv-num">STAGE 01</div><div class="pv-name">SW ID</div><div class="pv-desc">استخراج معرّف البرنامج</div></div>
+    <div class="pv-step"><div class="pv-icon">🎯</div><div class="pv-num">STAGE 02</div><div class="pv-name">Feature</div><div class="pv-desc">كشف DPF/EGR/IMMO</div></div>
+    <div class="pv-step"><div class="pv-icon">🔬</div><div class="pv-num">STAGE 03</div><div class="pv-name">Pattern</div><div class="pv-desc">مطابقة الأنماط</div></div>
+    <div class="pv-step"><div class="pv-icon">✅</div><div class="pv-num">STAGE 04</div><div class="pv-name">Context</div><div class="pv-desc">التحقق السياقي</div></div>
+    <div class="pv-step"><div class="pv-icon">⚙️</div><div class="pv-num">STAGE 05</div><div class="pv-name">Rules</div><div class="pv-desc">تطبيق القواعد</div></div>
+    <div class="pv-step"><div class="pv-icon">🔐</div><div class="pv-num">STAGE 06</div><div class="pv-name">Checksum</div><div class="pv-desc">تحديث المجموع</div></div>
+    <div class="pv-step"><div class="pv-icon">🧠</div><div class="pv-num">STAGE 07</div><div class="pv-name">Diff Learn</div><div class="pv-desc">حفظ الفروقات</div></div>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">1</div>
+        <div class="step-info"><div class="step-title">SW ID Extraction — استخراج معرّف البرنامج</div><div class="step-subtitle">الأولوية: تحديد هوية الملف قبل أي شيء</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">البرنامج يبحث في ملف BIN عن مراسٍ محددة مثل <code>SW:</code> و<code>VER:</code> و<code>0261</code> و<code>0262</code> وغيرها. عند العثور على نص مناسب يُستخرج كمعرّف برنامج (Software ID) لمطابقة السكريبتات لاحقاً.</p>
+        <div class="info-box info"><span class="ib-icon">💡</span><div>إذا لم يُكشف SW ID تلقائياً، اذهب لتبويب Script Engine ← زر "Scan SW IDs" لرؤية جميع المرشحين واختيار الأنسب.</div></div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.7">القيم المكتشفة تظهر في منطقة نص التحليل بسطر: <code>SW ID   XXXXX</code></p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">2</div>
+        <div class="step-info"><div class="step-title">Feature Detection — كشف الميزات</div><div class="step-subtitle">أهم مرحلة قبل التعديل: ما الذي يوجد فعلاً في الملف؟</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">يبحث البرنامج عن توقيعات بايتية خاصة بكل ميزة. مثلاً للـ DPF يبحث عن البايتات <code>01 00 01</code> و<code>DPF</code> و<code>FAP</code> في نطاقات محددة. النتيجة تُستخدم لإعطاء تحذيرات قبل الضبط.</p>
+        <table class="doc-table">
+          <thead><tr><th>الميزة</th><th>التوقيعات المبحوث عنها</th><th>الحد الأدنى للاكتشاف</th></tr></thead>
+          <tbody>
+            <tr><td>DPF</td><td><code>01 00 01</code>، <code>DPF</code>، <code>FAP</code>، <code>44 50 46</code></td><td>2 توقيعات أو أكثر</td></tr>
+            <tr><td>EGR</td><td><code>01 01 01</code>، <code>EGR</code>، <code>45 47 52</code></td><td>2 توقيعات أو أكثر</td></tr>
+            <tr><td>SCR/AdBlue</td><td><code>SCR</code>، <code>AdBlue</code>، <code>UREA</code>، <code>DEF</code></td><td>1 توقيع</td></tr>
+            <tr><td>IMMO</td><td><code>A5 A5 A5 A5</code>، <code>IMMO</code>، <code>SKC</code></td><td>1 توقيع</td></tr>
+            <tr><td>DTC</td><td><code>P0</code>، <code>P1</code>، <code>U0</code>، <code>C0</code></td><td>3 توقيعات أو أكثر</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box warn"><span class="ib-icon">⚠</span><div>إذا ظهر "not detected" لميزة ما مثل DPF قبل حذفها، هذا تحذير وليس منعاً. يمكنك الاستمرار لكن تأكد أولاً من أن الملف صحيح.</div></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">5</div>
+        <div class="step-info"><div class="step-title">Rule Engine — محرك القواعد والتعديلات</div><div class="step-subtitle">هنا تُطبَّق التعديلات الفعلية على الملف</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">بعد إيجاد النمط والتحقق من سياقه، يكتب البرنامج البايتات الجديدة في الإزاحة المحددة. يتم ذلك في وضع <code>replace</code> افتراضياً أو <code>or/and/xor</code> حسب السكريبت.</p>
+        <div class="info-box tip"><span class="ib-icon">✅</span><div>كل تعديل ناجح يُسجَّل في تقرير الأداء مع الإزاحة والبايتات القديمة والجديدة. راجع "Execution Log" في Script Engine.</div></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">6</div>
+        <div class="step-info"><div class="step-title">Checksum Update — تحديث المجموع التدقيقي</div><div class="step-subtitle">ضروري لقبول الملف من وحدة التحكم</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">بعد أي تعديل، يحسب البرنامج المجموع التدقيقي الجديد ويكتبه في الإزاحة المحددة في السكريبت. خوارزميات مدعومة:</p>
+        <table class="doc-table">
+          <thead><tr><th>الخوارزمية</th><th>الوصف</th><th>الاستخدام الشائع</th></tr></thead>
+          <tbody>
+            <tr><td>sum8</td><td>مجموع جميع البايتات mod 256</td><td>ECUs قديمة</td></tr>
+            <tr><td>sum16</td><td>مجموع 16-bit</td><td>Bosch ME7.x</td></tr>
+            <tr><td>sum32</td><td>مجموع 32-bit</td><td>عام</td></tr>
+            <tr><td>crc32</td><td>CRC-32 معياري</td><td>ECUs حديثة</td></tr>
+            <tr><td>xor8</td><td>XOR لجميع البايتات</td><td>Delphi/Siemens</td></tr>
+            <tr><td>custom_bosch</td><td>مجموع معكوس خاص بـ Bosch</td><td>EDC17 series</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box warn"><span class="ib-icon">⚠</span><div>إذا لم يكن السكريبت يعرّف <code>"checksum": {"enabled": true}</code> فلن يُحدَّث المجموع التدقيقي تلقائياً. في هذه الحالة قد تحتاج لأداة خارجية متخصصة بـ ECU المحدد.</div></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">7</div>
+        <div class="step-info"><div class="step-title">Diff Learning Storage — حفظ الفروقات وتوليد السكريبتات</div><div class="step-subtitle">البرنامج يتعلم من كل عملية</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">بعد كل عملية ناجحة، يقارن البرنامج الملف الأصلي بالمعدَّل ويحفظ جميع الفروقات في قاعدة بيانات <code>diff_learning.db</code>. هذه البيانات تُستخدم لتوليد سكريبتات JSON تلقائية للعمليات المستقبلية.</p>
+        <div class="info-box tip"><span class="ib-icon">✅</span><div>كلما استخدمت نفس العملية على نفس المتغير أكثر، كلما زادت درجة الثقة في الفارق وأصبح البرنامج يقترح السكريبت تلقائياً عند تحميل ملف مماثل.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 07 TAB ANALYSIS ════════ -->
+<section id="tab-analysis" class="doc-section reveal">
+  <span class="section-number">07 — تبويب التحليل</span>
+  <h2 class="section-title">تبويب <em>التحليل الرئيسي</em></h2>
+  <p class="section-intro">أول تبويب وأهمها. منه تبدأ كل عملية. يجب تحميل ملف BIN وتشغيل التحليل أولاً قبل استخدام أي تبويب آخر.</p>
+
+  <div class="mock-window">
+    <div class="mock-topbar">
+      <span class="mock-dot" style="background:#ef4444"></span>
+      <span class="mock-dot" style="background:#f59e0b"></span>
+      <span class="mock-dot" style="background:#22c55e"></span>
+      <span class="mock-bar-title">ECU Intelligence Pro v5 — تبويب التحليل</span>
+    </div>
+    <div class="mock-body">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--text2)">ملف BIN:</span>
+        <div style="flex:1;min-width:180px;background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:var(--mono);font-size:11px;color:var(--text3)">C:\ECU_Pro\files\edc17c10_vw.bin</div>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:6px 12px;font-size:11px;color:var(--text2);cursor:default">استعراض</div>
+        <span style="font-size:11px;color:var(--text2)">المرحلة:</span>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:6px 10px;font-family:var(--mono);font-size:10px;color:var(--accent)">Stage 1</div>
+        <div style="background:var(--accent);border-radius:6px;padding:7px 14px;font-size:11px;font-weight:700;color:#fff;cursor:default">▶ تحليل وضبط تلقائي</div>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:6px 12px;font-size:11px;color:var(--text2);cursor:default">تقرير PDF</div>
+      </div>
+      <div style="background:var(--accent);height:4px;border-radius:2px;width:72%;margin-bottom:14px;background:linear-gradient(90deg,var(--blue),var(--accent));"></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:12px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:8px">ملخص التحليل + سجل الضبط</div>
+          <div style="background:var(--bg2);border-radius:6px;padding:12px;font-family:var(--mono);font-size:10px;color:var(--text2);line-height:1.8;min-height:130px">
+            FILE    C:\ECU_Pro\files\edc17c10_vw.bin<br>
+            SHA256  a3f8...d29c<br>
+            SIZE    512,000 bytes (500 KB)<br>
+            ENTROPY 7.284<br>
+            <span style="color:var(--accent)">SW ID   EDC17C10_SW_0261</span><br>
+            ✔ VARIANT  <span style="color:var(--green)">EDC17C10</span><br>
+            ECU     Bosch EDC17C10<br>
+            SCORE   95   CONFIDENCE  95%<br>
+            ──── Feature Detection ────<br>
+            ✔ DPF PRESENT @ 0xB400<br>
+            ✔ EGR PRESENT @ 0xA200<br>
+            ✔ IMMO PRESENT @ 0x0200<br>
+            ──── Stage 1 Tune ─────────<br>
+            ✔ Fuel Map  +10%  |  256 cells<br>
+            ✔ EGR rate  → 20%<br>
+            ✔ Boost lim +5%
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:8px">التصحيحات المتاحة</div>
+          <div style="background:var(--bg2);border-radius:6px;overflow:hidden">
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:0;font-family:var(--mono);font-size:9px;">
+              <div style="background:var(--bg3);padding:6px 8px;color:var(--text3)">ID</div><div style="background:var(--bg3);padding:6px 8px;color:var(--text3)">الاسم</div><div style="background:var(--bg3);padding:6px 8px;color:var(--text3)">النوع</div>
+              <div style="padding:6px 8px;color:var(--accent);border-top:1px solid var(--border2)">dpf_off</div><div style="padding:6px 8px;color:var(--text2);border-top:1px solid var(--border2)">DPF Delete</div><div style="padding:6px 8px;border-top:1px solid var(--border2)"><span class="tag tag-red" style="font-size:8px">DPF</span></div>
+              <div style="padding:6px 8px;color:var(--accent);border-top:1px solid var(--border2)">egr_off</div><div style="padding:6px 8px;color:var(--text2);border-top:1px solid var(--border2)">EGR Delete</div><div style="padding:6px 8px;border-top:1px solid var(--border2)"><span class="tag tag-blue" style="font-size:8px">EGR</span></div>
+              <div style="padding:6px 8px;color:var(--accent);border-top:1px solid var(--border2)">immo_off</div><div style="padding:6px 8px;color:var(--text2);border-top:1px solid var(--border2)">IMMO OFF</div><div style="padding:6px 8px;border-top:1px solid var(--border2)"><span class="tag tag-green" style="font-size:8px">IMMO</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="num-list">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">تحميل ملف BIN</div>
+        <div class="num-desc">اسحب ملف BIN وأسقطه في منطقة الـ Drop Zone (منطقة الإسقاط المنقطة الحدود) أو انقر "استعراض" واختر الملف. الامتداد المقبول <code>.bin</code> وكذلك أي ملف ثنائي. حجم الملف عادة بين 256KB و2MB.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">اختيار مرحلة الضبط</div>
+        <div class="num-desc">من القائمة "المرحلة:" اختر Stage 1 أو 2 أو 3. هذا يحدد مستوى الضبط التلقائي الذي سيُطبَّق بعد التحليل. <strong>للمبتدئين: ابدأ دائماً بـ Stage 1.</strong></div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">تشغيل التحليل</div>
+        <div class="num-desc">انقر "▶ تحليل وضبط تلقائي". شريط التقدم (أزرق/برتقالي) يوضح التقدم. الوقت المتوقع: 5-30 ثانية حسب حجم الملف وسرعة الجهاز. لا تغلق البرنامج خلال هذا الوقت.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">4</div>
+      <div class="num-content">
+        <div class="num-title">قراءة النتائج</div>
+        <div class="num-desc">بعد الانتهاء تظهر النتائج في مربع النصوص الأيسر. اقرأ: اسم المتغير المكتشف، الانتروبيا، نتائج كشف الميزات، ومجموع تسجيل الضبط. الجانب الأيمن يعرض التصحيحات المتاحة لهذا المتغير.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box tip">
+    <span class="ib-icon">✅</span>
+    <div><strong>ملف الخرج:</strong> بعد كل تحليل ينشئ البرنامج تلقائياً: نسخة احتياطية في <code>output/backups/</code> وملف BIN معدَّل في <code>output/</code> وملف تقرير JSON وHTML في <code>output/</code>. انقر "فتح تقرير HTML" لفتح التقرير في المتصفح.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 08 FUEL MAPS ════════ -->
+<section id="tab-fuel" class="doc-section reveal">
+  <span class="section-number">08 — خرائط الوقود</span>
+  <h2 class="section-title">تبويب <em>خرائط الوقود</em></h2>
+  <p class="section-intro">يعرض خريطة الوقود (Fuel Map) كجدول 16×16 خلية مع تلوين بصري. يمكن تعديل الخلايا يدوياً وتصديرها CSV.</p>
+
+  <div class="num-list">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">تحديد الإزاحة (Offset)</div>
+        <div class="num-desc">حقل "Offset" يحدد أين تبدأ قراءة الخريطة في ملف BIN. إذا حمّلت الملف من تبويب التحليل مسبقاً، يملأ البرنامج الإزاحة تلقائياً بناءً على المتغير المكتشف. يمكنك تغييرها يدوياً بتنسيق <code>0x8000</code>.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">ضبط الأبعاد ونوع البيانات</div>
+        <div class="num-desc">Rows و Cols يحددان أبعاد الخريطة (افتراضي 16×16). نوع البيانات: <code>uint16_le</code> الأكثر شيوعاً لـ Bosch، <code>uint8</code> للخرائط القديمة، <code>float32_le</code> لبعض Continental.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">استخراج الخريطة وقراءتها</div>
+        <div class="num-desc">انقر "Extract Map". ستظهر الخريطة كجدول ملوّن: الأحمر = قيم عالية، الأزرق = قيم منخفضة. القيمة الأصلية تُعرض في كل خلية. يمكن رؤية الحد الأدنى والأقصى في شريط المعلومات.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">4</div>
+      <div class="num-content">
+        <div class="num-title">مقارنة قبل/بعد</div>
+        <div class="num-desc">بعد تشغيل ضبط Stage 1/2/3 من تبويب التحليل، عُد لهذا التبويب واستخرج الخريطة مجدداً. ثم انقر "Before/After" لرؤية ملخص: عدد الخلايا المعدلة، متوسط التغيير، والنسبة المئوية الإجمالية.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">5</div>
+      <div class="num-content">
+        <div class="num-title">تصدير CSV</div>
+        <div class="num-desc">انقر "Export CSV" لحفظ الخريطة كملف Excel/CSV يمكن فتحه وتحريره. مفيد لتوثيق التعديلات أو مقارنة خرائط ملفات مختلفة.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 09 BOOST ════════ -->
+<section id="tab-boost" class="doc-section reveal">
+  <span class="section-number">09 — خريطة الضغط</span>
+  <h2 class="section-title">تبويب <em>Boost Map</em></h2>
+  <p class="section-intro">يتيح عرض وتعديل خريطة ضغط الشاحن (Turbo Boost) مباشرة. التعديل يؤثر على ضغط الشاحن في كل نقطة تشغيل.</p>
+
+  <div class="info-box danger">
+    <span class="ib-icon">🚫</span>
+    <div><strong>تحذير:</strong> الزيادة المفرطة في قيم الضغط فوق <strong>2.8 bar</strong> قد تتلف الشاحن أو الميكانيكا. البرنامج يعطي تحذيراً تلقائياً عند تجاوز هذا الحد في أي خلية.</div>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">1</div>
+        <div class="step-info"><div class="step-title">تحميل البيانات من BIN</div><div class="step-subtitle">الخريطة لا تُحمَّل تلقائياً — يجب النقر يدوياً</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7">بعد تحميل الملف من تبويب التحليل، اذهب لتبويب Boost Map. تأكد من الإزاحة الصحيحة (تُملأ تلقائياً). انقر <strong>"Load from BIN"</strong>. ستظهر الخريطة بالألوان: الأزرق = ضغط منخفض، الأحمر = ضغط عالٍ.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">2</div>
+        <div class="step-info"><div class="step-title">تعديل الخلايا يدوياً</div><div class="step-subtitle">انقر مزدوج على أي خلية لتغيير قيمتها</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">انقر مرتين على الخلية لتعديل قيمتها. القيم بتنسيق <code>uint16</code> عادةً (0–65535). إذا تجاوزت قيمة خلية حد الأمان (2.8 bar)، يظهر شريط تحذير أصفر أعلى الخريطة ويتلون الخلية باللون الأحمر الداكن.</p>
+        <div class="info-box info"><span class="ib-icon">💡</span><div>القيم الخام في BIN لا تساوي الـ bar مباشرة. عادةً: القيمة / 10000 = bar. مثلاً 18000 = 1.8 bar.</div></div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">3</div>
+        <div class="step-info"><div class="step-title">تطبيق التعديلات على BIN</div><div class="step-subtitle">الخطوة الأهم — احفظ التعديلات في ملف جديد</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7">بعد الانتهاء من التعديلات انقر <strong>"Apply to BIN"</strong>. سيحفظ البرنامج ملف BIN جديد في مجلد <code>output/</code> باسم <code>boost_map_YYYYMMDD_HHMMSS.bin</code>.</p>
+        <div class="info-box warn"><span class="ib-icon">⚠</span><div>هذا الزر لا يعمل checksum تلقائياً. تأكد من تحديث المجموع التدقيقي إذا لزم الأمر باستخدام Script Engine أو أداة خارجية.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 10 DPF/EGR/IMMO ════════ -->
+<section id="tab-tune" class="doc-section reveal">
+  <span class="section-number">10 — DPF / EGR / IMMO / Tune</span>
+  <h2 class="section-title">تبويب <em>DPF / EGR / IMMO / Auto-Tune</em></h2>
+  <p class="section-intro">هذا التبويب يجمع عمليات الحذف والضبط في مكان واحد. يمكن تطبيق عمليات متعددة دفعة واحدة.</p>
+
+  <div class="compare-grid">
+    <div class="cg-col">
+      <div class="cg-header" style="color:var(--red)">⛔ DPF Delete</div>
+      <div class="cg-body">
+        <div class="cg-row">يكتب <code>00 00 00</code> في إزاحة DPF</div>
+        <div class="cg-row">يعطّل طلب التجديد التلقائي</div>
+        <div class="cg-row">يحذف كودات P2002/P2463</div>
+        <div class="cg-row no">يتطلب إزالة DPF من الماكينة</div>
+        <div class="cg-row no">غير قانوني للطرق العامة في بعض البلدان</div>
+      </div>
+    </div>
+    <div class="cg-col">
+      <div class="cg-header" style="color:var(--blue2)">🔵 EGR Delete</div>
+      <div class="cg-body">
+        <div class="cg-row">يكتب <code>00 00 00</code> في إزاحة EGR</div>
+        <div class="cg-row">يغلق صمام EGR برمجياً</div>
+        <div class="cg-row">يمنع رسائل الخطأ EGR</div>
+        <div class="cg-row no">يُنصح بإغلاق الصمام ميكانيكياً أيضاً</div>
+        <div class="cg-row no">قد يؤثر على الانبعاثات في الاختبار</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="num-list" style="margin-top:20px">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">اقرأ تحذيرات Feature Detection أولاً</div>
+        <div class="num-desc">أعلى التبويب يظهر شريط تحذير أصفر إذا لم تُكتشف الميزة في الملف. مثلاً <em>"DPF not detected in BIN — proceed with caution"</em>. هذا لا يمنعك لكن يجب أن تكون واعياً.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">اختر العمليات المطلوبة</div>
+        <div class="num-desc">ضع علامة ✓ على العمليات المطلوبة: DPF Delete، EGR Delete، IMMO Off. يمكن اختيار أكثر من عملية. ثم اختر مرحلة الضبط (Stage 1/2/3) إذا أردت. لا يمكن اختيار أكثر من مرحلة واحدة.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">التحقق من المتغير</div>
+        <div class="num-desc">إذا لم يُكتشف المتغير تلقائياً، استخدم قائمة "Override Variant" لاختياره يدوياً من بين 32+ متغير. هذا مهم جداً لأن الإزاحات تختلف بين كل متغير.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">4</div>
+      <div class="num-content">
+        <div class="num-title">تطبيق التعديلات</div>
+        <div class="num-desc">انقر "Apply Selected Modifications". البرنامج يُنشئ نسخة احتياطية أولاً ثم يطبّق العمليات المختارة بالترتيب. في حقل السجل الأخضر ستظهر نتائج تفصيلية لكل عملية.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">5</div>
+      <div class="num-content">
+        <div class="num-title">ملف الخرج</div>
+        <div class="num-desc">يُحفظ الملف المعدَّل في <code>output/</code> باسم يعكس العمليات المطبّقة مثل <code>filename_dpf_egr_s1.bin</code>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box danger">
+    <span class="ib-icon">🚫</span>
+    <div><strong>Stage 3 تحذير خاص:</strong> المرحلة الثالثة تحذف حد العزم (Torque Limit) وتزيد الوقود 30% وضغط السكة. هذا يتطلب حتماً ترقية ميكانيكية (injectors, turbo, intercooler). لا تطبّق Stage 3 على سيارة بمحرك أصلي.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 11 PATCH MANAGER ════════ -->
+<section id="tab-patch" class="doc-section reveal">
+  <span class="section-number">11 — Patch Manager</span>
+  <h2 class="section-title">تبويب <em>مدير التصحيحات</em></h2>
+  <p class="section-intro">قائمة بجميع التصحيحات المحفوظة في قاعدة البيانات. يمكن إنشاء تصحيحات مخصصة وتطبيق أكثر من تصحيح دفعة واحدة.</p>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">A</div>
+        <div class="step-info"><div class="step-title">تطبيق تصحيح موجود</div><div class="step-subtitle">من قائمة التصحيحات المحفوظة</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="check-list">
+          <div class="check-item">ضع علامة ✓ في عمود "اختيار" لكل تصحيح تريد تطبيقه</div>
+          <div class="check-item">يمكن تحديد أكثر من تصحيح في نفس الوقت</div>
+          <div class="check-item">انقر "Apply Selected Patches" — يطبّق التصحيحات بالترتيب</div>
+          <div class="check-item">كل تصحيح يتحقق من وجود البايتات الأصلية في الإزاحة قبل الكتابة</div>
+          <div class="check-item warn">إذا كانت البايتات الأصلية لا تطابق، يظهر خطأ ولا يُطبَّق التصحيح</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">B</div>
+        <div class="step-info"><div class="step-title">إنشاء تصحيح مخصص</div><div class="step-subtitle">أضف تصحيحاتك الخاصة للقاعدة</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">في قسم "Custom Patch" أسفل القائمة:</p>
+        <table class="doc-table">
+          <thead><tr><th>الحقل</th><th>الوصف</th><th>مثال</th></tr></thead>
+          <tbody>
+            <tr><td>ID</td><td>معرّف فريد للتصحيح</td><td><code>my_dpf_off_001</code></td></tr>
+            <tr><td>Name</td><td>وصف قصير للتصحيح</td><td><code>DPF Delete Custom</code></td></tr>
+            <tr><td>Offset</td><td>الإزاحة بالـ hex</td><td><code>0xB400</code></td></tr>
+            <tr><td>Find</td><td>البايتات الأصلية للتحقق</td><td><code>01 00 01</code></td></tr>
+            <tr><td>Replace</td><td>البايتات الجديدة</td><td><code>00 00 00</code></td></tr>
+            <tr><td>ECU ID</td><td>المتغير المستهدف</td><td><code>edc17c10</code></td></tr>
+          </tbody>
+        </table>
+        <div class="info-box tip"><span class="ib-icon">✅</span><div>انقر "Save to DB" لحفظه. يظهر في القائمة فوراً ويُحفظ دائماً في قاعدة البيانات.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 12 OBD ════════ -->
+<section id="tab-obd" class="doc-section reveal">
+  <span class="section-number">12 — OBD / CAN</span>
+  <h2 class="section-title">تبويب <em>OBD / CAN Decoder</em></h2>
+  <p class="section-intro">يحلل سجلات OBD-II من جهاز ELM327 وسجلات CAN من <code>candump</code>. لا يتصل بالسيارة مباشرة — فقط يقرأ ملفات السجل.</p>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">A</div>
+        <div class="step-info"><div class="step-title">تحليل سجل OBD-II</div><div class="step-subtitle">من جهاز ELM327 أو أي Scanner</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">السجل المقبول بتنسيق OBD-II الخام مثل:</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">OBD-II LOG</span></div>
+          <pre><span class="cmt">&gt; 010C              ; طلب RPM</span>
+41 0C 1A F0         <span class="cmt">; استجابة: RPM</span>
+<span class="cmt">&gt; 0105              ; طلب درجة حرارة</span>
+41 05 7B             <span class="cmt">; استجابة: 83°C</span>
+P0400               <span class="cmt">; كود خطأ EGR</span></pre>
+        </div>
+        <div class="check-list">
+          <div class="check-item">اختر "OBD-II / ELM327 Log" من القائمة</div>
+          <div class="check-item">الصق النص أو انقر "Load Log File" لتحميل الملف</div>
+          <div class="check-item">انقر "Parse" لتحليل البيانات وعرضها في الجدول</div>
+          <div class="check-item">الجدول يعرض: رقم PID، الاسم، القيمة المفسَّرة، الوحدة</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">B</div>
+        <div class="step-info"><div class="step-title">تحليل سجل CAN candump</div><div class="step-subtitle">من أداة candump على Linux</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-block-lang">candump LOG</span></div>
+          <pre>(1609459200.123456) can0 7DF#0201050000000000
+(1609459200.234567) can0 7E8#0641057B00000000</pre>
+        </div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-top:12px">اختر "CAN (candump)" من القائمة، الصق السجل، انقر Parse. يُعرض ID و Data لكل رسالة.</p>
+      </div>
+    </div>
+  </div>
+
+  <table class="doc-table" style="margin-top:16px">
+    <thead><tr><th>PID Hex</th><th>الاسم</th><th>صيغة الحساب</th></tr></thead>
+    <tbody>
+      <tr><td>0x04</td><td>Engine Load</td><td>A × 100 / 255 = %</td></tr>
+      <tr><td>0x05</td><td>Coolant Temp</td><td>A − 40 = °C</td></tr>
+      <tr><td>0x0C</td><td>Engine RPM</td><td>(A×256+B) / 4 = RPM</td></tr>
+      <tr><td>0x0D</td><td>Vehicle Speed</td><td>A = km/h</td></tr>
+      <tr><td>0x10</td><td>MAF Air Flow</td><td>(A×256+B) / 100 = g/s</td></tr>
+      <tr><td>0x11</td><td>Throttle Position</td><td>A × 100 / 255 = %</td></tr>
+      <tr><td>0x42</td><td>Module Voltage</td><td>(A×256+B) / 1000 = V</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 13 POPS ════════ -->
+<section id="tab-pops" class="doc-section reveal">
+  <span class="section-number">13 — Pops &amp; Bangs</span>
+  <h2 class="section-title">تبويب <em>Pops &amp; Bangs — فرقعة العادم</em></h2>
+  <p class="section-intro">يضيف صوت الفرقعة والطقطقة للعادم عند رفع القدم عن البنزين. ثلاثة مستويات بمعاملات مختلفة.</p>
+
+  <table class="doc-table">
+    <thead><tr><th>المستوى</th><th>الوصف</th><th>الأنسب لـ</th><th>التأثير على الاستهلاك</th></tr></thead>
+    <tbody>
+      <tr><td>Mild</td><td>طقطقة خفيفة عند رفع القدم</td><td>الاستخدام اليومي</td><td>خفيف جداً</td></tr>
+      <tr><td>Aggressive</td><td>فرقعات قوية عند التباطؤ</td><td>Track Day</td><td>متوسط</td></tr>
+      <tr><td>Full Crackle</td><td>أقصى تأثير مستمر</td><td>السباقات فقط</td><td>مرتفع</td></tr>
+    </tbody>
+  </table>
+
+  <div class="num-list">
+    <div class="num-item">
+      <div class="num-circle">1</div>
+      <div class="num-content">
+        <div class="num-title">اختيار المستوى</div>
+        <div class="num-desc">حدد المستوى المناسب. <strong>للاستخدام اليومي اختر Mild.</strong> الأوضاع الأقوى تسبب ارتفاع درجة حرارة عنق العادم وزيادة استهلاك الوقود.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">2</div>
+      <div class="num-content">
+        <div class="num-title">تحديد المتغير</div>
+        <div class="num-desc">البرنامج يستخدم المتغير المكتشف من التحليل. إذا لم يُكتشف، اختر من "Override Variant". Pops &amp; Bangs يعمل مع البنزين والديزل لكن التأثير على البنزين أقوى عادةً.</div>
+      </div>
+    </div>
+    <div class="num-item">
+      <div class="num-circle">3</div>
+      <div class="num-content">
+        <div class="num-title">التطبيق</div>
+        <div class="num-desc">انقر الزر التدرجي الأحمر/البرتقالي. يُنشئ نسخة احتياطية أولاً ثم يكتب 4 معاملات: كمية الوقود عند الكوف، مدة الحقن، تأخير قطع الوقود، وتأخير التوقيت. الملف يُحفظ باسم <code>filename_pb_mild.bin</code>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box warn">
+    <span class="ib-icon">⚠</span>
+    <div><strong>تحذير:</strong> Full Crackle Map على الاستخدام اليومي يزيد درجة حرارة محفز العادم (Catalytic Converter) بشكل كبير وقد يتلفه. استخدمه في السباقات فقط.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 14 DIFF ════════ -->
+<section id="tab-diff" class="doc-section reveal">
+  <span class="section-number">14 — BIN Diff Viewer</span>
+  <h2 class="section-title">تبويب <em>مقارنة BIN Diff</em></h2>
+  <p class="section-intro">يقارن ملفَي BIN بايت ببايت ويعرض الفروقات. مفيد لمعرفة ماذا غيّر شخص آخر في ملف، أو للتحقق من تعديلاتك.</p>
+
+  <div class="num-list">
+    <div class="num-item"><div class="num-circle">1</div><div class="num-content"><div class="num-title">اختيار الملفين</div><div class="num-desc">انقر "Browse A" لاختيار الملف الأصلي (Original) و"Browse B" للملف المعدَّل. المسار يظهر في الحقل المجاور.</div></div></div>
+    <div class="num-item"><div class="num-circle">2</div><div class="num-content"><div class="num-title">تشغيل المقارنة</div><div class="num-desc">انقر "Compare Files". تظهر جميع الفروقات في جدول: الإزاحة، البايتات القديمة (أحمر)، البايتات الجديدة (أخضر)، طول الفارق. شريط الملخص يعرض عدد المناطق وإجمالي البايتات المعدلة.</div></div></div>
+    <div class="num-item"><div class="num-circle">3</div><div class="num-content"><div class="num-title">تعلم الفارق</div><div class="num-desc">في قسم "Diff Learning Settings" اختر المتغير والعملية (مثلاً <code>DPF_DELETE</code>) ثم انقر "Learn This Diff". يُحفظ الفارق في قاعدة بيانات التعلم مع علامة "confirmed".</div></div></div>
+    <div class="num-item"><div class="num-circle">4</div><div class="num-content"><div class="num-title">تصدير الفروقات</div><div class="num-desc">انقر "Export Diff" لحفظ الفروقات كملف JSON. مفيد للتوثيق أو المشاركة مع فريق العمل.</div></div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 15 SCRIPT ENGINE ════════ -->
+<section id="tab-script" class="doc-section reveal">
+  <span class="section-number">15 — Script Engine</span>
+  <h2 class="section-title">تبويب <em>Script Engine — المحرك المتقدم</em></h2>
+  <p class="section-intro">الأداة الأقوى في البرنامج. تنفيذ سكريبتات JSON مخصصة بخوارزمية بحث ومطابقة وتحقق متطورة. يدعم التوليد التلقائي من قاعدة بيانات التعلم.</p>
+
+  <div class="highlight-box">
+    <h4>🔄 تدفق العمل الأساسي في Script Engine</h4>
+    <p>1. تحميل ملف BIN من التحليل → 2. مسح SW ID تلقائياً → 3. مطابقة السكريبتات بـ SW ID → 4. تشغيل السكريبت → 5. مراجعة Pipeline Trace → 6. حفظ الملف المعدَّل</p>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">A</div>
+        <div class="step-info"><div class="step-title">فهم واجهة Script Engine</div><div class="step-subtitle">أربعة أقسام رئيسية</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <table class="doc-table">
+          <thead><tr><th>القسم</th><th>الموقع</th><th>الوظيفة</th></tr></thead>
+          <tbody>
+            <tr><td>Script List</td><td>يسار</td><td>قائمة جميع السكريبتات المحفوظة في مجلد scripts/</td></tr>
+            <tr><td>Details Tab</td><td>يمين أعلى</td><td>تفاصيل السكريبت المحدد: الخطوات، القواعد، المعاملات</td></tr>
+            <tr><td>JSON Editor Tab</td><td>يمين أعلى</td><td>تعديل السكريبت مباشرة وحفظه</td></tr>
+            <tr><td>SW ID Candidates</td><td>يمين أعلى</td><td>كل معرّفات البرامج المكتشفة في ملف BIN</td></tr>
+            <tr><td>Pipeline Trace</td><td>يمين أعلى</td><td>تفصيل ما حدث في كل مرحلة عند تشغيل السكريبت</td></tr>
+            <tr><td>Execution Log</td><td>أسفل</td><td>سجل مفصل لكل خطوة في آخر تشغيل</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">B</div>
+        <div class="step-info"><div class="step-title">تشغيل سكريبت يدوياً</div><div class="step-subtitle">للسكريبتات المعروفة</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="check-list">
+          <div class="check-item">حدد السكريبت من القائمة بالنقر عليه</div>
+          <div class="check-item">راجع تفاصيله في تبويب "Details" لتأكيد أنه مناسب للملف</div>
+          <div class="check-item">انقر "▶ Run Script"</div>
+          <div class="check-item">راجع Execution Log: سطر ✔ يعني نجاح، سطر ✘ يعني فشل</div>
+          <div class="check-item">تحقق من Pipeline Trace لمعرفة ما حدث في كل مرحلة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">C</div>
+        <div class="step-info"><div class="step-title">Auto-Match &amp; Run — التشغيل التلقائي</div><div class="step-subtitle">البرنامج يختار السكريبت المناسب تلقائياً</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="num-list">
+          <div class="num-item"><div class="num-circle">1</div><div class="num-content"><div class="num-title">تأكد من وجود SW ID</div><div class="num-desc">شريط SW ID أعلى التبويب يجب أن يعرض معرفاً مكتشفاً. إذا لم يُكتشف تلقائياً، انقر "Scan SW IDs" واختر المناسب من قائمة المرشحين بالنقر المزدوج.</div></div></div>
+          <div class="num-item"><div class="num-circle">2</div><div class="num-content"><div class="num-title">انقر "Auto-Match &amp; Run"</div><div class="num-desc">البرنامج يقارن SW ID مع قواعد جميع السكريبتات. إذا وجد تطابقاً واحداً يشغّله مباشرة. إذا وجد أكثر من واحد تظهر نافذة للاختيار.</div></div></div>
+          <div class="num-item"><div class="num-circle">3</div><div class="num-content"><div class="num-title">راجع النتائج</div><div class="num-desc">بعد التشغيل راجع Pipeline Trace لتأكيد نجاح كل مرحلة. الملف المعدَّل يُحفظ في output/ تلقائياً.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 21 WRITING SCRIPTS ════════ -->
+<section id="scripts-writing" class="doc-section reveal">
+  <span class="section-number">21 — كتابة سكريبت</span>
+  <h2 class="section-title">كتابة <em>سكريبت JSON مخصص</em></h2>
+  <p class="section-intro">يمكن كتابة سكريبتات JSON مخصصة من الصفر أو تعديل موجودة. هذا القسم يشرح كل حقل بالتفصيل.</p>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span class="code-block-lang">JSON Script — هيكل كامل موضح</span>
+      <button class="code-block-copy" onclick="copyCode(this)">نسخ</button>
+    </div>
+    <pre>{
+  <span class="key">"id"</span>: <span class="str">"my_script_001"</span>,          <span class="cmt">// معرّف فريد بدون مسافات</span>
+  <span class="key">"name"</span>: <span class="str">"DPF Delete EDC17C10"</span>,   <span class="cmt">// اسم وصفي للعرض</span>
+  <span class="key">"version"</span>: <span class="str">"1.0"</span>,
+  <span class="key">"author"</span>: <span class="str">"Fares Mansour"</span>,
+  <span class="key">"ecu_family"</span>: <span class="str">"EDC17C10"</span>,       <span class="cmt">// اسم المتغير</span>
+  
+  <span class="key">"software_id_rules"</span>: [         <span class="cmt">// قواعد مطابقة SW ID</span>
+    {
+      <span class="key">"type"</span>: <span class="str">"contains"</span>,           <span class="cmt">// contains/startswith/exact/regex</span>
+      <span class="key">"value"</span>: <span class="str">"EDC17C10"</span>
+    }
+  ],
+  
+  <span class="key">"steps"</span>: [                      <span class="cmt">// قائمة التعديلات</span>
+    {
+      <span class="key">"name"</span>: <span class="str">"Disable DPF flag"</span>,
+      
+      <span class="key">"search_pattern"</span>: <span class="str">"01 00 01"</span>,  <span class="cmt">// النمط للبحث عنه (hex)</span>
+      <span class="key">"mask"</span>: <span class="kw">null</span>,                  <span class="cmt">// قناع اختياري مثل "FF 00 FF"</span>
+      
+      <span class="key">"search_range_start"</span>: <span class="str">"0xB000"</span>, <span class="cmt">// نطاق البحث بداية</span>
+      <span class="key">"search_range_end"</span>: <span class="str">"0xC000"</span>,   <span class="cmt">// نطاق البحث نهاية</span>
+      
+      <span class="key">"context_before"</span>: <span class="kw">null</span>,     <span class="cmt">// بايتات قبل النمط للتحقق (اختياري)</span>
+      <span class="key">"context_after"</span>: <span class="kw">null</span>,      <span class="cmt">// بايتات بعد النمط للتحقق (اختياري)</span>
+      <span class="key">"context_tolerance"</span>: <span class="num">0</span>,    <span class="cmt">// هامش التسامح بالبايتات</span>
+      
+      <span class="key">"offset_from_pattern"</span>: <span class="num">0</span>,   <span class="cmt">// إزاحة الكتابة عن النمط</span>
+      <span class="key">"write_bytes"</span>: <span class="str">"00 00 00"</span>,  <span class="cmt">// ما يُكتب</span>
+      <span class="key">"write_mode"</span>: <span class="str">"replace"</span>,    <span class="cmt">// replace/or/and/xor</span>
+      
+      <span class="key">"verify_after"</span>: <span class="str">"00 00 00"</span>, <span class="cmt">// تحقق بعد الكتابة (اختياري)</span>
+      <span class="key">"skip_if_already"</span>: <span class="kw">true</span>     <span class="cmt">// تجاهل إذا كانت مطبّقة مسبقاً</span>
+    }
+  ],
+  
+  <span class="key">"checksum"</span>: {               <span class="cmt">// تحديث المجموع التدقيقي</span>
+    <span class="key">"enabled"</span>: <span class="kw">false</span>,          <span class="cmt">// true = تفعيل التحديث التلقائي</span>
+    <span class="key">"algorithm"</span>: <span class="str">"sum8"</span>,
+    <span class="key">"range_start"</span>: <span class="str">"0x0000"</span>,
+    <span class="key">"range_end"</span>: <span class="str">"0xFFFE"</span>,
+    <span class="key">"store_offset"</span>: <span class="str">"0xFFFF"</span>,
+    <span class="key">"store_size"</span>: <span class="num">1</span>
+  }
+}</pre>
+  </div>
+
+  <div class="info-box info">
+    <span class="ib-icon">💡</span>
+    <div><strong>مكان حفظ السكريبتات:</strong> مجلد <code>scripts/</code> في نفس مجلد البرنامج. كل ملف JSON = سكريبت واحد. البرنامج يحمّلها تلقائياً عند الفتح. يمكن استخدام "↻ Reload" لتحميل سكريبتات جديدة بدون إغلاق البرنامج.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 16 DIFF LEARN TAB ════════ -->
+<section id="tab-difflearn" class="doc-section reveal">
+  <span class="section-number">16 — Diff Learning Tab</span>
+  <h2 class="section-title">تبويب <em>Diff Learning — التعلم التلقائي</em></h2>
+  <p class="section-intro">يعرض قاعدة بيانات جميع الفروقات المحفوظة ويتيح توليد سكريبتات تلقائية منها.</p>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">A</div>
+        <div class="step-info"><div class="step-title">قراءة الإحصائيات</div><div class="step-subtitle">أعلى الصفحة — نظرة سريعة على قاعدة التعلم</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="check-list">
+          <div class="check-item"><strong>Total Diffs:</strong> إجمالي الفروقات المخزّنة من كل العمليات</div>
+          <div class="check-item"><strong>Confirmed:</strong> الفروقات المؤكدة (times_seen ≥ 1 أو confirmed = 1)</div>
+          <div class="check-item"><strong>Scripts Generated:</strong> عدد السكريبتات المولّدة تلقائياً من قاعدة التعلم</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">B</div>
+        <div class="step-info"><div class="step-title">توليد سكريبت تلقائي</div><div class="step-subtitle">من الفروقات المؤكدة</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <div class="num-list">
+          <div class="num-item"><div class="num-circle">1</div><div class="num-content"><div class="num-title">اختر المتغير والعملية</div><div class="num-desc">من قائمة "Variant" اختر المتغير (مثلاً EDC17C10). من قائمة "Operation" اختر العملية (مثلاً DPF_DELETE).</div></div></div>
+          <div class="num-item"><div class="num-circle">2</div><div class="num-content"><div class="num-title">انقر "Generate Script from Selection"</div><div class="num-desc">البرنامج يجمع كل الفروقات المؤكدة لهذا الاختيار ويحوّلها لسكريبت JSON كامل. يُحفظ تلقائياً في مجلد <code>scripts/</code>.</div></div></div>
+          <div class="num-item"><div class="num-circle">3</div><div class="num-content"><div class="num-title">استخدام السكريبت</div><div class="num-desc">اذهب لتبويب Script Engine وانقر "↻ Reload". السكريبت الجديد سيظهر بادئته <code>[AUTO]</code>. يمكن تشغيله الآن على أي ملف من نفس المتغير.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 17 HEX VIEW ════════ -->
+<section id="tab-hex" class="doc-section reveal">
+  <span class="section-number">17 — Hex View</span>
+  <h2 class="section-title">تبويب <em>عرض Hex</em></h2>
+  <p class="section-intro">يعرض محتوى ملف BIN بتنسيق hexadecimal كلاسيكي. مفيد للتحقق اليدوي من محتوى أي إزاحة.</p>
+
+  <div class="check-list">
+    <div class="check-item">حدد الإزاحة (Offset) بتنسيق hex مثل <code>0x8000</code> أو decimal مثل <code>32768</code></div>
+    <div class="check-item">حدد عدد البايتات للعرض في حقل Length (افتراضي 512)</div>
+    <div class="check-item">انقر "View" لعرض البيانات</div>
+    <div class="check-item">كل سطر يعرض: الإزاحة، 16 بايت hex، ترجمة ASCII</div>
+    <div class="check-item warn">التبويب للعرض فقط — لا يمكن التعديل منه مباشرة</div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header"><span class="code-block-lang">HEX VIEW مثال — عرض كلاسيكي</span></div>
+    <pre>  0000B400  01 00 01 00 00 00 00 00  00 00 00 FF A5 A5 00 00  ................
+  0000B410  00 00 00 00 FF FF FF FF  01 00 01 00 00 00 00 00  ................
+  0000B420  A5 A5 A5 A5 00 00 00 00  01 01 01 00 00 00 00 00  ................</pre>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 18 JOB LOG ════════ -->
+<section id="tab-jobs" class="doc-section reveal">
+  <span class="section-number">18 — Job Log</span>
+  <h2 class="section-title">تبويب <em>سجل الأعمال</em></h2>
+  <p class="section-intro">لتوثيق كل عملية قمت بها. مهم جداً للشركات والمحترفين لتتبع الأعمال وإنشاء تقارير.</p>
+
+  <div class="steps-list">
+    <div class="step-card open">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-num">A</div>
+        <div class="step-info"><div class="step-title">إضافة وظيفة جديدة</div><div class="step-subtitle">بعد كل عملية أضف سجلاً</div></div>
+        <span class="step-expand">▼</span>
+      </div>
+      <div class="step-body">
+        <table class="doc-table">
+          <thead><tr><th>الحقل</th><th>ما تكتبه</th><th>مثال</th></tr></thead>
+          <tbody>
+            <tr><td>Customer</td><td>اسم العميل أو رقمه من قائمة CRM</td><td>أحمد محمد</td></tr>
+            <tr><td>Date</td><td>تاريخ العملية (افتراضي: اليوم)</td><td>2025-08-15</td></tr>
+            <tr><td>Make</td><td>ماركة السيارة</td><td>Volkswagen</td></tr>
+            <tr><td>Model</td><td>موديل السيارة</td><td>Golf 6</td></tr>
+            <tr><td>Year</td><td>سنة الصنع</td><td>2011</td></tr>
+            <tr><td>VIN</td><td>رقم الهيكل (اختياري)</td><td>WVWZZZ1KZ...</td></tr>
+            <tr><td>ECU</td><td>اختر من القائمة</td><td>EDC17C10</td></tr>
+            <tr><td>Operations</td><td>ما فعلته</td><td>DPF Delete + Stage 1</td></tr>
+            <tr><td>Status</td><td>completed / in_progress / cancelled</td><td>completed</td></tr>
+            <tr><td>Notes</td><td>أي ملاحظات إضافية</td><td>تم الاختبار على الدينامو</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box tip"><span class="ib-icon">✅</span><div>انقر "Add Job" لإضافة السجل. يظهر فوراً في الجدول ويُحفظ في قاعدة البيانات دائماً.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 19 CRM ════════ -->
+<section id="tab-crm" class="doc-section reveal">
+  <span class="section-number">19 — CRM العملاء</span>
+  <h2 class="section-title">تبويب <em>إدارة العملاء CRM</em></h2>
+  <p class="section-intro">قاعدة بيانات كاملة للعملاء. أضف بياناتهم مرة واحدة واستخدمها في سجلات الأعمال.</p>
+
+  <div class="check-list">
+    <div class="check-item">أضف عميلاً بالاسم (إلزامي)، الهاتف، البريد، العنوان، الملاحظات</div>
+    <div class="check-item">انقر "Add Customer" للحفظ</div>
+    <div class="check-item">انقر أي سجل في الجدول لتعديله (يملأ الحقول تلقائياً) ثم انقر "Update Selected"</div>
+    <div class="check-item">البحث في الوقت الفعلي — اكتب في حقل البحث لتصفية القائمة</div>
+    <div class="check-item">انقر "Delete Selected" لحذف العميل المحدد (لا يمكن التراجع)</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 20 HEX CONVERT ════════ -->
+<section id="tab-convert" class="doc-section reveal">
+  <span class="section-number">20 — HEX Convert</span>
+  <h2 class="section-title">تبويب <em>محوّل الصيغ</em></h2>
+  <p class="section-intro">تحويل بين BIN وصيغ Intel HEX وMotorola S-Record. مفيد للتعامل مع أدوات برمجة مختلفة.</p>
+
+  <table class="doc-table">
+    <thead><tr><th>وضع التحويل</th><th>الاتجاه</th><th>الاستخدام</th></tr></thead>
+    <tbody>
+      <tr><td>BIN → S-Record</td><td>ثنائي → موتورولا</td><td>بعض أدوات البرمجة القديمة تقبل SREC فقط</td></tr>
+      <tr><td>BIN → Intel HEX</td><td>ثنائي → Intel</td><td>أدوات JTAG وبعض programmers</td></tr>
+      <tr><td>S-Record → BIN</td><td>موتورولا → ثنائي</td><td>تحويل SREC للبرنامج</td></tr>
+      <tr><td>Intel HEX → BIN</td><td>Intel → ثنائي</td><td>تحويل HEX للبرنامج</td></tr>
+    </tbody>
+  </table>
+
+  <div class="num-list">
+    <div class="num-item"><div class="num-circle">1</div><div class="num-content"><div class="num-title">اختر ملف الإدخال</div><div class="num-desc">انقر "Browse" وحدد الملف المصدر.</div></div></div>
+    <div class="num-item"><div class="num-circle">2</div><div class="num-content"><div class="num-title">اختر اتجاه التحويل</div><div class="num-desc">من القائمة اختر ما تريد تحويله.</div></div></div>
+    <div class="num-item"><div class="num-circle">3</div><div class="num-content"><div class="num-title">انقر Convert</div><div class="num-desc">يُنشئ ملف الخرج بنفس اسم الملف المصدر لكن بامتداد مختلف في نفس المجلد.</div></div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 22 SAFETY ════════ -->
+<section id="safety" class="doc-section reveal">
+  <span class="section-number">22 — حدود الأمان</span>
+  <h2 class="section-title"><em>حدود الأمان</em> المضمّنة في البرنامج</h2>
+  <p class="section-intro">البرنامج يراقب هذه الحدود في كل عملية ضبط ويعطي تحذيرات عند تجاوزها.</p>
+
+  <table class="doc-table">
+    <thead><tr><th>المعامل</th><th>الحد الأقصى الآمن</th><th>ماذا يحدث عند التجاوز</th></tr></thead>
+    <tbody>
+      <tr><td>fuel_map_max_increase_pct</td><td>35%</td><td>تحذير في السجل — العملية لا تُوقف</td></tr>
+      <tr><td>boost_max_bar</td><td>2.8 bar</td><td>تحذير + تلوين الخلية باللون الأحمر الداكن</td></tr>
+      <tr><td>timing_retard_max_deg</td><td>10°</td><td>تحذير في سجل Stage</td></tr>
+      <tr><td>rail_pressure_max_bar</td><td>1800 bar</td><td>مراقبة داخلية</td></tr>
+      <tr><td>torque_max_nm</td><td>650 Nm</td><td>مراقبة في Stage 2/3</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box danger">
+    <span class="ib-icon">🚫</span>
+    <div><strong>تحذير عام مهم جداً:</strong> دائماً احفظ نسخة احتياطية من الملف الأصلي قبل أي تعديل. البرنامج يفعل ذلك تلقائياً في <code>output/backups/</code> لكن احتفظ أيضاً بنسخة خارجية. التعديل الخاطئ قد يجعل وحدة التحكم لا تعمل (Brick).</div>
+  </div>
+
+  <div class="info-box tip">
+    <span class="ib-icon">✅</span>
+    <div><strong>أفضل الممارسات:</strong> اختبر أي تعديل على ديناميك قبل الاختبار على الطريق. ابدأ بـ Stage 1 دائماً ثم ارتقِ تدريجياً. لا تطبّق Stage 3 بدون ترقية الفلاتر والمضخة والتوربو.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 23 FAQ ════════ -->
+<section id="faq" class="doc-section reveal">
+  <span class="section-number">23 — الأسئلة الشائعة</span>
+  <h2 class="section-title"><em>الأسئلة الشائعة</em> وحلول المشاكل</h2>
+  <p class="section-intro">إجابات للأسئلة الأكثر تكراراً من المستخدمين.</p>
+
+  <div class="faq-item open">
+    <div class="faq-q" onclick="toggleFaq(this)">البرنامج لا يتعرف على متغير ECU الملف — يقول "No confident match"<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">هذا يعني أن معرّف المتغير (ID bytes) لم يُعثر عليه في الملف. حاول: (1) استخدم خيار "Override Variant" في تبويب DPF/EGR/Tune وحدد المتغير يدوياً. (2) تحقق من أن الملف سليم وغير مشفر. (3) ابحث في الملف بالـ Hex View عن اسم المتغير. (4) إذا كان الملف مضغوطاً، يحتاج لفك الضغط أولاً.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">ظهر خطأ "Patch validation failed" عند تطبيق تصحيح<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">هذا يعني أن البايتات في الإزاحة المحددة لا تطابق ما هو متوقع في حقل "Find". أسباب محتملة: (1) الملف تم تعديله مسبقاً والتصحيح مطبّق أصلاً. (2) الإزاحة خاطئة للمتغير المحدد. (3) الملف من إصدار برنامج مختلف. حل: استخدم Hex View للتحقق من محتوى الإزاحة أولاً.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">كيف أعرف أن الملف المعدَّل صالح وسليم؟<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">خطوات التحقق: (1) قارن الملف الأصلي بالمعدَّل باستخدام Diff Viewer — تأكد أن الفروق محدودة بما فعلته فقط. (2) افتح الملف المعدَّل في تبويب التحليل وتأكد من قراءة المتغير بشكل صحيح. (3) Entropy الملف المعدَّل يجب أن يكون قريباً من الأصلي (فرق أقل من 0.1). (4) اختبر على الديناميك قبل الوضع في السيارة.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">هل يمكن تشغيل البرنامج بدون ترخيص؟<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">لا. البرنامج يتحقق من الترخيص عند كل فتح. بدون ترخيص صالح، تبويبات العمل الأساسية تكون مقفلة. تواصل مع فارس منصور على +970595438486 للحصول على ترخيص.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">غيّرت جهازي — كيف أنقل الترخيص؟<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">الترخيص مرتبط بـ HWID الجهاز. لنقله: (1) أرسل HWID الجهاز الجديد لفارس منصور. (2) ستستلم مفتاحاً جديداً مرتبطاً بالجهاز الجديد. (3) فعّل المفتاح الجديد. HWID موجود في تبويب الدعم الفني أو نافذة الترخيص.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">البرنامج لا يفتح — خطأ في Python أو PyQt6<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">تحقق من: (1) Python إصدار 3.10 أو أعلى مثبّت (<code>python --version</code>). (2) PyQt6 مثبّت (<code>pip install PyQt6</code>). (3) تشغيل CMD كـ Administrator إذا كان مجلد البرنامج في Program Files. (4) تأكد من وجود صلاحيات الكتابة على مجلد البرنامج.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">كيف أضيف متغير ECU جديد غير موجود في القائمة؟<span class="fq-arrow">▼</span></div>
+    <div class="faq-a">المتغيرات الـ 32+ مدمجة في كود البرنامج في قاموس ALL_ECU_REGIONS. لإضافة متغير جديد: تواصل مع فارس منصور مع معلومات المتغير الجديد (الإزاحات الضرورية). يمكن أيضاً استخدام Script Engine لكتابة سكريبت مخصص لأي متغير بغض النظر عن وجوده في القاعدة.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════ 24 SUPPORT ════════ -->
+<section id="support-contact" class="doc-section reveal">
+  <span class="section-number">24 — التواصل</span>
+  <h2 class="section-title">التواصل مع <em>الدعم الفني</em></h2>
+  <p class="section-intro">فريق الدعم متاح 24/7. عند التواصل أرسل هذه المعلومات لتسريع الحل.</p>
+
+  <div class="highlight-box" style="margin-bottom:28px">
+    <h4>📋 ما ترسله عند طلب الدعم</h4>
+    <p>
+      1. <strong>Machine ID (HWID)</strong> — من تبويب الدعم الفني في البرنامج<br>
+      2. <strong>متغير ECU</strong> — مثلاً EDC17C10<br>
+      3. <strong>وصف المشكلة</strong> — ماذا حاولت وماذا حدث بالضبط<br>
+      4. <strong>رسالة الخطأ</strong> — انسخها كاملاً من السجل<br>
+      5. <strong>ملف BIN</strong> — أرفقه إذا أمكن (اختياري لكن يسرّع الحل كثيراً)
+    </p>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px;text-align:center;max-width:420px;margin:0 auto">
+    <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accentd));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:26px;font-weight:900;color:#fff;margin:0 auto 16px;position:relative">
+      FM
+      <span style="position:absolute;bottom:2px;right:2px;width:16px;height:16px;background:var(--green);border-radius:50%;border:2px solid var(--card)"></span>
+    </div>
+    <div style="font-family:var(--display);font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px">فارس منصور</div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:16px;letter-spacing:.06em">ECU CALIBRATION SPECIALIST</div>
+    <div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--text);margin-bottom:20px;direction:ltr">+970 595 438 486</div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="https://wa.me/970595438486" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:#25D366;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="tel:+970595438486" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">📞 اتصال</a>
+    </div>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:10px;color:var(--green)">● متاح 24 / 7</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- ════ BACK TO TOP ════ -->
+<a href="#" id="btt" title="العودة للأعلى">↑</a>
+
+<script>
+// ── Scroll progress
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=Math.round((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)||0;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressLabel').textContent=pct+'%';
+  document.getElementById('btt').classList.toggle('show',h.scrollTop>400);
+});
+
+// ── Reveal on scroll
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');revealObs.unobserve(e.target)}});
+},{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ── Sidebar active
+const sections2=document.querySelectorAll('.doc-section[id]');
+const sbItems=document.querySelectorAll('.sb-item[data-section]');
+const ioSb=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      sbItems.forEach(a=>a.classList.remove('active'));
+      const match=document.querySelector('.sb-item[data-section="'+e.target.id+'"]');
+      if(match){
+        match.classList.add('active');
+        match.scrollIntoView({block:'nearest',behavior:'smooth'});
+      }
+    }
+  });
+},{rootMargin:'-10% 0px -80% 0px'});
+sections2.forEach(s=>ioSb.observe(s));
+
+// ── Mark done on click
+sbItems.forEach(a=>{
+  a.addEventListener('click',()=>{
+    setTimeout(()=>a.classList.add('done'),1200);
+  });
+});
+
+// ── Toggle step cards
+function toggleStep(header){
+  const card=header.closest('.step-card');
+  card.classList.toggle('open');
+}
+
+// ── Toggle FAQ
+function toggleFaq(header){
+  const item=header.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+// Open all step cards on page load for first one only
+// (already set open in HTML)
+
+// ── Copy code
+function copyCode(btn){
+  const pre=btn.closest('.code-block').querySelector('pre');
+  const text=pre.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✓ تم';
+    btn.style.color='var(--green)';
+    btn.style.borderColor='var(--green)';
+    setTimeout(()=>{btn.textContent=orig;btn.style.color='';btn.style.borderColor='';},2000);
+  });
+}
+
+// ── Search
+const searchInput=document.getElementById('searchInput');
+searchInput.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  if(!q)return;
+  const allText=document.querySelectorAll('.doc-section p, .doc-section td, .doc-section li, .doc-section .num-desc, .doc-section .step-body p');
+  let firstMatch=null;
+  allText.forEach(el=>{
+    if(el.textContent.toLowerCase().includes(q)&&!firstMatch){
+      firstMatch=el;
+    }
+  });
+  if(firstMatch) firstMatch.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+// ── Pipeline visual RTL fix
+document.querySelectorAll('.pv-step').forEach((el,i)=>{
+  el.addEventListener('mouseenter',()=>{
+    el.style.borderColor='var(--accent)';
+    el.style.boxShadow='0 0 16px rgba(249,115,22,.15)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.borderColor='';
+    el.style.boxShadow='';
+  });
+});
+</script>
+</body>
+</html>
