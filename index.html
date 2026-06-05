@@ -1,7 +1,7 @@
 
 bash
 
-cat > /mnt/user-data/outputs/ecu-user-guide.html << 'ENDOFFILE'
+cat > /mnt/user-data/outputs/ecu-user-guide.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-lang="ar">
 <head>
@@ -37,7 +37,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 ::-webkit-scrollbar-track{background:var(--bg2)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
-/* TOP BAR */
 #topbar{
   position:fixed;top:0;left:0;right:0;z-index:300;
   height:var(--topbar-h);
@@ -75,9 +74,7 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .tb-ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .tb-ham.open span:nth-child(2){opacity:0}
 .tb-ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-/* LAYOUT */
 #layout{display:flex;min-height:100vh;padding-top:var(--topbar-h)}
-/* SIDEBAR */
 #sidebar{
   width:var(--sidebar-w);flex-shrink:0;background:var(--bg2);
   border-left:1px solid var(--border2);
@@ -96,10 +93,8 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 [data-lang="en"] .sb-chk,[data-lang="fr"] .sb-chk,[data-lang="de"] .sb-chk,[data-lang="tr"] .sb-chk{margin-right:0;margin-left:auto}
 .sb-item.done .sb-chk{opacity:1}
 .sb-div{height:1px;background:var(--border2);margin:6px 16px}
-/* MAIN */
 #main{margin-right:var(--sidebar-w);flex:1;min-width:0;padding-bottom:120px}
 [data-lang="en"] #main,[data-lang="fr"] #main,[data-lang="de"] #main,[data-lang="tr"] #main{margin-right:0;margin-left:var(--sidebar-w)}
-/* HERO */
 .doc-hero{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border2);padding:44px 48px 36px;position:relative;overflow:hidden}
 .doc-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(249,115,22,.06) 0%,transparent 70%);pointer-events:none}
 [data-lang="en"] .doc-hero::before,[data-lang="fr"] .doc-hero::before,[data-lang="de"] .doc-hero::before,[data-lang="tr"] .doc-hero::before{right:auto;left:-80px}
@@ -120,7 +115,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .hdl-ic svg{width:20px;height:20px}
 .hdl-lb{font-family:var(--display);font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.04em}
 .hdl-mt{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:2px}
-/* SECTIONS */
 .doc-sec{padding:46px 48px 0;scroll-margin-top:calc(var(--topbar-h) + 12px)}
 .doc-sec:last-child{padding-bottom:46px}
 .sec-num{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;margin-bottom:7px;display:block}
@@ -128,7 +122,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .sec-title em{color:var(--accent);font-style:normal}
 .sec-intro{font-size:14px;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--border2)}
 .sec-div{height:1px;background:var(--border2);margin:42px 0}
-/* FEAT GRID */
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:11px;margin:16px 0}
 .feat-card{background:var(--card);border:1px solid var(--border2);border-radius:11px;padding:16px 14px;transition:border-color .25s,transform .2s;cursor:default}
 .feat-card:hover{border-color:var(--border);transform:translateY(-2px)}
@@ -136,7 +129,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .feat-icon svg{width:19px;height:19px}
 .feat-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
 .feat-desc{font-size:11px;color:var(--text2);line-height:1.55}
-/* PIPELINE */
 .pip-vis{display:flex;align-items:center;overflow-x:auto;padding:18px 0;scrollbar-width:none}
 .pip-vis::-webkit-scrollbar{display:none}
 .pv-step{flex:0 0 112px;background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:13px 9px;text-align:center;position:relative;transition:border-color .2s,transform .2s;cursor:default}
@@ -151,7 +143,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .pv-n{font-family:var(--mono);font-size:8px;color:var(--text3);letter-spacing:.07em;margin-bottom:2px}
 .pv-nm{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px}
 .pv-d{font-size:9px;color:var(--text3);line-height:1.4}
-/* STEP CARDS */
 .steps-list{display:flex;flex-direction:column;gap:14px}
 .step-card{background:var(--card);border:1px solid var(--border2);border-radius:11px;overflow:hidden;transition:border-color .2s}
 .step-card:hover{border-color:var(--border)}
@@ -166,7 +157,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .step-card.open .step-arr svg{stroke:var(--accent)}
 .step-body{border-top:1px solid var(--border2);padding:18px;display:none}
 .step-card.open .step-body{display:block}
-/* INFO BOXES */
 .ib{padding:12px 15px;border-radius:8px;margin:11px 0;display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.65}
 .ib svg{width:17px;height:17px;flex-shrink:0;margin-top:1px}
 .ib.tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);color:#86efac}
@@ -174,7 +164,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .ib.danger{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
 .ib.info{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);color:#93c5fd}
 .ib strong{font-weight:700}
-/* CODE BLOCKS */
 .cb{background:#030712;border:1px solid var(--border2);border-radius:8px;overflow:hidden;margin:11px 0;font-family:var(--mono);font-size:11px;direction:ltr;text-align:left}
 .cb-hdr{background:var(--bg3);border-bottom:1px solid var(--border2);padding:7px 12px;display:flex;align-items:center;justify-content:space-between}
 .cb-lang{font-size:9px;color:var(--text3);letter-spacing:.06em}
@@ -184,36 +173,30 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .cb-copy:hover{color:var(--accent);border-color:var(--accent)}
 .cb pre{padding:13px;overflow-x:auto;line-height:1.65;color:#c9d4e8}
 .cb .kw{color:#93c5fd}.cb .str{color:#86efac}.cb .num{color:#fcd34d}.cb .key{color:#c4b5fd}
-/* TABLES */
 .dt{width:100%;border-collapse:collapse;font-size:12px;margin:11px 0}
 .dt th{background:var(--bg3);color:var(--text2);padding:9px 12px;text-align:right;font-weight:600;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;letter-spacing:.04em}
 [data-lang="en"] .dt th,[data-lang="fr"] .dt th,[data-lang="de"] .dt th,[data-lang="tr"] .dt th{text-align:left}
 .dt td{padding:8px 12px;border-bottom:1px solid var(--border2);color:var(--text2);vertical-align:top;line-height:1.55}
 .dt tr:hover td{background:rgba(255,255,255,.015)}
 .dt td:first-child{font-family:var(--mono);font-size:10px;color:var(--accent);white-space:nowrap;font-weight:600}
-/* NUM LIST */
 .nl{display:flex;flex-direction:column;gap:9px;margin:11px 0}
 .ni{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:12px 14px}
 .nc{width:25px;height:25px;flex-shrink:0;border-radius:50%;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:10px;font-weight:900;color:var(--accent)}
 .nt{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
 .nd{font-size:11px;color:var(--text2);line-height:1.6}
-/* CHECK LIST */
 .cl{display:flex;flex-direction:column;gap:7px;margin:10px 0}
 .ci{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);line-height:1.55}
 .ci svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
-/* HIGHLIGHT BOX */
 .hb{background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(59,130,246,.04));border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:18px 20px;margin:14px 0}
 .hb h4{font-family:var(--display);font-size:11px;font-weight:900;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .hb h4 svg{width:14px;height:14px;flex-shrink:0}
 .hb p{font-size:13px;color:var(--text2);line-height:1.7}
-/* MOCK WINDOW */
 .mw{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:14px 0}
 .mw-top{background:var(--bg3);border-bottom:1px solid var(--border2);padding:8px 12px;display:flex;align-items:center;gap:7px}
 .mw-dot{width:8px;height:8px;border-radius:50%}
 .mw-t{font-family:var(--mono);font-size:9px;color:var(--text3);margin-right:auto}
 [data-lang="en"] .mw-t,[data-lang="fr"] .mw-t,[data-lang="de"] .mw-t,[data-lang="tr"] .mw-t{margin-right:0;margin-left:auto}
 .mw-body{padding:13px}
-/* COMPARE GRID */
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:11px 0}
 .cg-col{background:var(--card);border:1px solid var(--border2);border-radius:9px;overflow:hidden}
 .cg-hdr{padding:10px 13px;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;display:flex;align-items:center;gap:7px}
@@ -221,7 +204,6 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .cg-body{padding:12px 13px;display:flex;flex-direction:column;gap:7px}
 .cg-row{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2)}
 .cg-row svg{width:13px;height:13px;flex-shrink:0}
-/* FAQ */
 .faq-item{background:var(--card);border:1px solid var(--border2);border-radius:9px;overflow:hidden;margin-bottom:8px}
 .faq-q{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text);gap:11px;user-select:none}
 .faq-q:hover{background:rgba(255,255,255,.02)}
@@ -230,21 +212,16 @@ body{font-family:var(--sans-ar);background:var(--bg);color:var(--text);overflow-
 .faq-item.open .faq-arr{transform:rotate(180deg)}
 .faq-a{display:none;padding:12px 16px 15px;font-size:12px;color:var(--text2);line-height:1.7;border-top:1px solid var(--border2)}
 .faq-item.open .faq-a{display:block}
-/* REVEAL */
 .rv{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
 .rv.vis{opacity:1;transform:none}
-/* inline code */
 code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--accent2)}
-/* BTT */
 #btt{position:fixed;bottom:24px;right:24px;z-index:150;width:40px;height:40px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 4px 16px rgba(249,115,22,.3);text-decoration:none}
 [data-lang="en"] #btt,[data-lang="fr"] #btt,[data-lang="de"] #btt,[data-lang="tr"] #btt{right:auto;left:24px}
 #btt svg{width:17px;height:17px;stroke:#fff}
 #btt.show{opacity:1;pointer-events:all}
 #btt:hover{transform:translateY(-3px)}
-/* OVERLAY */
 #sb-overlay{display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.5)}
 #sb-overlay.show{display:block}
-/* RESPONSIVE */
 @media(max-width:1024px){.tb-search{max-width:200px}.tb-prog{display:none}}
 @media(max-width:768px){
   :root{--sidebar-w:0px}
@@ -345,7 +322,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
 
 <main id="main">
 
-<!-- HERO -->
 <div class="doc-hero">
   <div class="hero-badge"><span class="hb-dot"></span><span data-k="hero_badge">الدليل الرسمي الكامل</span></div>
   <h1><span data-k="hero_title">دليل الاستخدام التفصيلي</span><br><em>ECU Intelligence Pro v5</em></h1>
@@ -358,12 +334,11 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
   <a href="https://wa.me/970595438486" class="hero-dl" target="_blank">
     <div class="hdl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-    <div><div class="hdl-lb" data-k="dl_title">تنزيل ECU Intelligence Pro v5</div><div class="hdl-mt" data-k="dl_meta">Windows 10/11 · Python 3.10+ · تواصل للحصول على النسخة</div></div>
+    <div><div class="hdl-lb" data-k="dl_title">تنزيل ECU Intelligence Pro v5</div><div class="hdl-mt" data-k="dl_meta">Windows 10/11 · تواصل للحصول على النسخة</div></div>
     <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" style="width:17px;height:17px;flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>
   </a>
 </div>
 
-<!-- 00 -->
 <section id="s00" class="doc-sec rv">
   <span class="sec-num">00 — <span data-k="sn00">مقدمة</span></span>
   <h2 class="sec-title"><span data-k="st00">نظرة عامة على</span> <em data-k="se00">البرنامج</em></h2>
@@ -379,23 +354,21 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib info"><svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><strong data-k="sys_req_t">متطلبات النظام:</strong> <span data-k="sys_req">Windows 10/11 (64-bit) · 4GB RAM · 500MB</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 01 -->
 <section id="s01" class="doc-sec rv">
   <span class="sec-num">01 — <span data-k="sn01">التثبيت</span></span>
   <h2 class="sec-title"><span data-k="st01">كيفية</span> <em data-k="se01">تشغيل البرنامج</em></h2>
-  <p class="sec-intro" data-k="si01">البرنامج لا يتطلب تثبيتاً تقليدياً. يعمل مباشرة من مجلده مع Python وPyQt6 مثبتَين على الجهاز.</p>
+  <p class="sec-intro" data-k="si01">البرنامج لا يتطلب تثبيتاً تقليدياً. يعمل مباشرة من مجلده</p>
   <div class="nl">
     <div class="ni"><div class="nc">1</div><div><div class="nt" data-k="in1t">ضع ملفات البرنامج في مجلد واحد</div><div class="nd" data-k="in1d">ضع جميع الملفات في مجلد مثل <code>C:\ECU_Pro\</code>. تأكد من صلاحيات الكتابة.</div></div></div>
     <div class="ni"><div class="nc">2</div><div><div class="nt" data-k="in2t">فك الضغط</div><div class="nd" data-k="in2d">عن طريق:</div></div>
   </div>
-  <div class="cb"><div class="cb-hdr"><span class="cb-lang">CMD / PowerShell</span><div class="cb-r"><span class="cb-dot" style="background:#ef4444"></span><span class="cb-dot" style="background:#f59e0b"></span><span class="cb-dot" style="background:#22c55e"></span><button class="cb-copy" data-k="copy">نسخ</button></div></div><pre>فك الضغط يتم باستخدام اي برنامج فك ضغط</pre></div>
+  <div class="cb"><div class="cb-hdr"><div class="cb-r"><span class="cb-dot" style="background:#ef4444"></span><span class="cb-dot" style="background:#f59e0b"></span><span class="cb-dot" style="background:#22c55e"></span><button class="cb-copy" data-k="copy">نسخ</button></div></div><pre>فك الضغط يتم باستخدام اي برنامج فك ضغط</pre></div>
   <div class="nl" style="margin-top:0"><div class="ni"><div class="nc">3</div><div><div class="nt" data-k="in3t">تشغيل البرنامج</div><div class="nd" data-k="in3d">من نفس المجلد نفّذ:</div></div></div></div>
-  <div class="cb"><div class="cb-hdr"><span class="cb-lang">CMD</span><div class="cb-r"><span class="cb-dot" style="background:#ef4444"></span><span class="cb-dot" style="background:#f59e0b"></span><span class="cb-dot" style="background:#22c55e"></span><button class="cb-copy" data-k="copy">نسخ</button></div></div><pre>شغل البرنامج وسيقوم البرنامج بالاقلاع مباشرة</pre></div>
+  <div class="cb"><div class="cb-hdr"><div class="cb-r"><span class="cb-dot" style="background:#ef4444"></span><span class="cb-dot" style="background:#f59e0b"></span><span class="cb-dot" style="background:#22c55e"></span><button class="cb-copy" data-k="copy">نسخ</button></div></div><pre>شغل البرنامج وسيقوم البرنامج بالاقلاع مباشرة</pre></div>
   <div class="ib warn"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div><strong data-k="warn_note">ملاحظة:</strong> <span data-k="in_warn">عند أول تشغيل ينشئ البرنامج تلقائياً: <code>output/</code> و<code>output/backups/</code> و<code>scripts/</code> وقواعد البيانات <code>.db</code>. لا تحذف هذه الملفات.</span></div></div>
-  <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div><strong data-k="tip_note">نصيحة:</strong> قم بوضع البرنامج وملفاته في مجلد منعزل قبل تشغيله </div></div>
+  <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div><strong data-k="tip_note">نصيحة:</strong> <span data-k="in_tip">قم بوضع البرنامج وملفاته في مجلد منعزل قبل تشغيله</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 02 -->
 <section id="s02" class="doc-sec rv">
   <span class="sec-num">02 — <span data-k="sn02">الترخيص</span></span>
   <h2 class="sec-title"><span data-k="st02">تفعيل</span> <em data-k="se02">الترخيص</em></h2>
@@ -417,7 +390,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </tbody></table>
 </section><div class="sec-div"></div>
 
-<!-- 03 -->
 <section id="s03" class="doc-sec rv">
   <span class="sec-num">03 — <span data-k="sn03">خط الأنابيب</span></span>
   <h2 class="sec-title"><span data-k="st03">فهم</span> <em data-k="se03">خط الأنابيب السباعي</em></h2>
@@ -443,7 +415,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
 </section><div class="sec-div"></div>
 
-<!-- 04 -->
 <section id="s04" class="doc-sec rv">
   <span class="sec-num">04 — SW ID Extraction</span>
   <h2 class="sec-title"><span data-k="st04">المرحلة 1</span> <em>SW ID Extraction</em></h2>
@@ -451,7 +422,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib info"><svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div data-k="s04tip">انقر "Scan SW IDs" في Script Engine لعرض جميع المعرّفات المكتشفة في الملف. اختر الأنسب للمطابقة.</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 05 -->
 <section id="s05" class="doc-sec rv">
   <span class="sec-num">05 — Feature Detection</span>
   <h2 class="sec-title"><span data-k="st05">المرحلة 2</span> <em>Feature Detection</em></h2>
@@ -459,7 +429,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib warn"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg><div data-k="s05w">إذا أظهر "not detected" لميزة تعلم أنها موجودة، تحقق من أن الملف غير مشفر وحجمه صحيح.</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 06 -->
 <section id="s06" class="doc-sec rv">
   <span class="sec-num">06 — Diff Learning (Stage 7)</span>
   <h2 class="sec-title"><span data-k="st06">المرحلة 7</span> <em>Diff Learning Engine</em></h2>
@@ -467,7 +436,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div data-k="s06tip">في تبويب BIN Diff Viewer يمكنك تعليم الفرق يدوياً بعد تحديد المتغير والعملية ثم النقر على "Learn This Diff".</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 07 -->
 <section id="s07" class="doc-sec rv">
   <span class="sec-num">07 — <span data-k="sn07">تبويب التحليل</span></span>
   <h2 class="sec-title"><span data-k="st07">تبويب</span> <em data-k="se07">التحليل الرئيسي</em></h2>
@@ -498,7 +466,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div><strong data-k="out_t">ملف الخرج:</strong> <span data-k="out_d">نسخة احتياطية في <code>output/backups/</code> وملف BIN معدَّل في <code>output/</code> وتقارير JSON/HTML.</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 08 -->
 <section id="s08" class="doc-sec rv">
   <span class="sec-num">08 — <span data-k="sn08">خرائط الوقود</span></span>
   <h2 class="sec-title"><span data-k="st08">تبويب</span> <em data-k="se08">خرائط الوقود</em></h2>
@@ -511,7 +478,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
 </section><div class="sec-div"></div>
 
-<!-- 09 -->
 <section id="s09" class="doc-sec rv">
   <span class="sec-num">09 — Boost Map</span>
   <h2 class="sec-title"><span data-k="st09">تبويب</span> <em>Boost Map</em></h2>
@@ -524,7 +490,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
 </section><div class="sec-div"></div>
 
-<!-- 10 -->
 <section id="s10" class="doc-sec rv">
   <span class="sec-num">10 — DPF / EGR / IMMO / Tune</span>
   <h2 class="sec-title"><em data-k="se10">DPF / EGR / IMMO / Auto-Tune</em></h2>
@@ -538,7 +503,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib danger" style="margin-top:14px"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><strong data-k="s3w_t">Stage 3 تحذير:</strong> <span data-k="s3w_d">تحذف حد العزم وتزيد الوقود 30%. تتطلب ترقية ميكانيكية. لا تطبّق على محرك أصلي.</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 11 -->
 <section id="s11" class="doc-sec rv">
   <span class="sec-num">11 — Patch Manager</span>
   <h2 class="sec-title"><span data-k="st11">تبويب</span> <em data-k="se11">مدير التصحيحات</em></h2>
@@ -547,7 +511,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <tbody><tr><td>ID</td><td data-k="p_id">معرّف فريد</td><td><code>dpf_off_001</code></td></tr><tr><td>Offset</td><td data-k="p_off">الإزاحة hex</td><td><code>0xB400</code></td></tr><tr><td>Find</td><td data-k="p_find">البايتات الأصلية</td><td><code>01 00 01</code></td></tr><tr><td>Replace</td><td data-k="p_rep">البايتات الجديدة</td><td><code>00 00 00</code></td></tr><tr><td>ECU ID</td><td data-k="p_ecu">المتغير</td><td><code>edc17c10</code></td></tr></tbody></table>
 </section><div class="sec-div"></div>
 
-<!-- 12 -->
 <section id="s12" class="doc-sec rv">
   <span class="sec-num">12 — OBD / CAN</span>
   <h2 class="sec-title"><span data-k="st12">تبويب</span> <em>OBD / CAN Decoder</em></h2>
@@ -556,7 +519,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <tbody><tr><td>0x04</td><td>Engine Load</td><td>A × 100 / 255 = %</td></tr><tr><td>0x05</td><td>Coolant Temp</td><td>A − 40 = °C</td></tr><tr><td>0x0C</td><td>Engine RPM</td><td>(A×256+B) / 4 = RPM</td></tr><tr><td>0x0D</td><td>Vehicle Speed</td><td>A = km/h</td></tr><tr><td>0x11</td><td>Throttle</td><td>A × 100 / 255 = %</td></tr></tbody></table>
 </section><div class="sec-div"></div>
 
-<!-- 13 -->
 <section id="s13" class="doc-sec rv">
   <span class="sec-num">13 — Pops &amp; Bangs</span>
   <h2 class="sec-title"><em data-k="se13">Pops &amp; Bangs — فرقعة العادم</em></h2>
@@ -566,7 +528,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib warn"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg><div data-k="pops_w">Full Crackle يرفع حرارة المحفز كثيراً وقد يتلفه. للسباقات فقط.</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 14 -->
 <section id="s14" class="doc-sec rv">
   <span class="sec-num">14 — BIN Diff Viewer</span>
   <h2 class="sec-title"><span data-k="st14">تبويب</span> <em data-k="se14">مقارنة BIN Diff</em></h2>
@@ -579,7 +540,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
 </section><div class="sec-div"></div>
 
-<!-- 15 -->
 <section id="s15" class="doc-sec rv">
   <span class="sec-num">15 — Script Engine</span>
   <h2 class="sec-title"><span data-k="st15">تبويب</span> <em data-k="se15">Script Engine المتقدم</em></h2>
@@ -589,7 +549,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <tbody><tr><td>Script List</td><td data-k="se_l1">جميع السكريبتات في مجلد scripts/</td></tr><tr><td>JSON Editor</td><td data-k="se_l2">تعديل السكريبت مباشرة</td></tr><tr><td>SW ID Candidates</td><td data-k="se_l3">معرّفات البرامج المكتشفة</td></tr><tr><td>Pipeline Trace</td><td data-k="se_l4">تفصيل كل مرحلة</td></tr><tr><td>Execution Log</td><td data-k="se_l5">سجل آخر تشغيل</td></tr></tbody></table>
 </section><div class="sec-div"></div>
 
-<!-- 17 -->
 <section id="s17" class="doc-sec rv">
   <span class="sec-num">17 — Hex View</span>
   <h2 class="sec-title"><span data-k="st17">تبويب</span> <em data-k="se17">عرض Hex</em></h2>
@@ -604,7 +563,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
 0000B410  00 00 00 00 FF FF FF FF  01 00 01 00 00  ............</pre></div>
 </section><div class="sec-div"></div>
 
-<!-- 18 -->
 <section id="s18" class="doc-sec rv">
   <span class="sec-num">18 — Job Log</span>
   <h2 class="sec-title"><span data-k="st18">تبويب</span> <em data-k="se18">سجل الأعمال</em></h2>
@@ -614,7 +572,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div data-k="j_tip">انقر Add Job. يظهر فوراً في الجدول ويُحفظ في قاعدة البيانات دائماً.</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 19 -->
 <section id="s19" class="doc-sec rv">
   <span class="sec-num">19 — CRM</span>
   <h2 class="sec-title"><span data-k="st19">تبويب</span> <em data-k="se19">إدارة العملاء CRM</em></h2>
@@ -627,7 +584,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   </div>
 </section><div class="sec-div"></div>
 
-<!-- 21 -->
 <section id="s21" class="doc-sec rv">
   <span class="sec-num">21 — <span data-k="sn21">كتابة سكريبت</span></span>
   <h2 class="sec-title"><span data-k="st21">كتابة</span> <em data-k="se21">سكريبت JSON مخصص</em></h2>
@@ -654,7 +610,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib info"><svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><strong data-k="sc_save_t">مكان الحفظ:</strong> <span data-k="sc_save">مجلد <code>scripts/</code> — كل ملف JSON = سكريبت واحد. استخدم "↻ Reload" لتحميله بدون إعادة فتح البرنامج.</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 22 -->
 <section id="s22" class="doc-sec rv">
   <span class="sec-num">22 — <span data-k="sn22">حدود الأمان</span></span>
   <h2 class="sec-title"><em data-k="se22">حدود الأمان المضمّنة</em></h2>
@@ -665,7 +620,6 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="ib tip"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><div><strong data-k="bp_t">أفضل الممارسات:</strong> <span data-k="bp_d">اختبر على ديناميك أولاً. ابدأ بـ Stage 1 دائماً. Stage 3 تتطلب ترقية الفلاتر والمضخة والتوربو.</span></div></div>
 </section><div class="sec-div"></div>
 
-<!-- 23 FAQ -->
 <section id="s23" class="doc-sec rv">
   <span class="sec-num">23 — FAQ</span>
   <h2 class="sec-title"><em data-k="se23">الأسئلة الشائعة</em></h2>
@@ -674,11 +628,10 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
   <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q2">خطأ "Patch validation failed"</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a2">البايتات في الإزاحة لا تطابق حقل Find. الملف معدَّل مسبقاً، أو الإزاحة خاطئة، أو إصدار مختلف.</div></div>
   <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q3">كيف أعرف أن الملف المعدَّل سليم؟</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a3">قارن بـ Diff Viewer. Entropy يجب أن يكون قريباً من الأصلي (فرق أقل من 0.1). اختبر على الديناميك أولاً.</div></div>
   <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q4">غيّرت جهازي — كيف أنقل الترخيص؟</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a4">أرسل HWID الجهاز الجديد للدعم الفني على +970 595 438 486. ستستلم مفتاحاً جديداً.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q5">البرنامج لا يفتح — خطأ Python</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a5">تحقق: أن النظام المثبت لديك هو Win10/11 وأن Ram 4G على الاقل وأن هناك مساحة تخزين كافية.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q5">البرنامج لا يفتح</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a5">تحقق: أن النظام المثبت لديك هو Win10/11 وأن Ram 4G على الاقل وأن هناك مساحة تخزين كافية.</div></div>
   <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-k="q6">كيف أضيف متغير ECU جديد؟</span><div class="faq-arr"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div></div><div class="faq-a" data-k="a6">تواصل مع الدعم الفني مع الإزاحات الضرورية. أو اكتب سكريبت JSON مخصص في Script Engine.</div></div>
 </section><div class="sec-div"></div>
 
-<!-- 24 SUPPORT -->
 <section id="s24" class="doc-sec rv">
   <span class="sec-num">24 — <span data-k="sn24">الدعم</span></span>
   <h2 class="sec-title"><span data-k="st24">التواصل مع</span> <em data-k="se24">الدعم الفني</em></h2>
@@ -711,15 +664,12 @@ code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,.05);bor
 </a>
 
 <script>
-// ═══════════════════════════════════════════
-// TRANSLATIONS
-// ═══════════════════════════════════════════
 const T = {
 ar:{dir:'rtl',fam:'Cairo',
   dl_btn:'تنزيل البرنامج',hero_badge:'الدليل الرسمي الكامل',hero_title:'دليل الاستخدام التفصيلي',
   hero_desc:'شرح شامل ومفصل لكل تبويب وميزة وخيار في البرنامج. مناسب للمبتدئين والمحترفين على حد سواء.',
   stat_sec:'قسم شرح',stat_pip:'مراحل Pipeline',stat_tabs:'تبويب وظيفي',
-  dl_title:'تنزيل ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · Python 3.10+ · تواصل للحصول على النسخة',
+  dl_title:'تنزيل ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · تواصل للحصول على النسخة',
   sb_s0:'البداية',sb_00:'مقدمة ونظرة عامة',sb_01:'التثبيت والتشغيل',sb_02:'تفعيل الترخيص',
   sb_s1:'خط الأنابيب — 7 مراحل',sb_03:'فهم خط الأنابيب',sb_04:'المرحلة 1 — SW ID',sb_05:'المرحلة 2 — Feature Detection',sb_06:'المرحلة 7 — Diff Learning',
   sb_s2:'تبويبات البرنامج',sb_07:'تبويب التحليل',sb_08:'خرائط الوقود',sb_09:'خريطة الضغط Boost',
@@ -733,12 +683,12 @@ ar:{dir:'rtl',fam:'Cairo',
   f5t:'محرك السكريبت',f5d:'تنفيذ تعديلات مخصصة بالنمط مع التحقق السياقي المتقدم',
   f6t:'إدارة الأعمال CRM',f6d:'سجل عملاء كامل وتوثيق الأعمال مع تصدير CSV',
   sys_req_t:'متطلبات النظام:',sys_req:'Windows 10/11 (64-bit) · 4GB RAM · 500MB',
-  sn01:'التثبيت',st01:'كيفية',se01:'تشغيل البرنامج',si01:'البرنامج لا يتطلب تثبيتاً تقليدياً. يعمل مباشرة من مجلده مع Python وPyQt6 مثبتَين على الجهاز.',
+  sn01:'التثبيت',st01:'كيفية',se01:'تشغيل البرنامج',si01:'البرنامج لا يتطلب تثبيتاً تقليدياً. يعمل مباشرة من مجلده',
   in1t:'ضع ملفات البرنامج في مجلد واحد',in1d:'ضع جميع الملفات في مجلد مثل <code>C:\\ECU_Pro\\</code>. تأكد من صلاحيات الكتابة.',
   in2t:'فك الضغط',in2d:'عن طريق',
   in3t:'تشغيل البرنامج',in3d:'من نفس المجلد نفّذ:',
   warn_note:'ملاحظة:',in_warn:'عند أول تشغيل ينشئ البرنامج تلقائياً: <code>output/</code> و<code>output/backups/</code> و<code>scripts/</code> وقواعد البيانات <code>.db</code>. لا تحذف هذه الملفات.',
-  tip_note:'نصيحة:',in_tip:'أنشئ ملف <code>run.bat</code> يحتوي على <code>python ecu_intel_v5.py</code> للتشغيل بنقرة مزدوجة.',
+  tip_note:'نصيحة:',in_tip:'قم بوضع البرنامج وملفاته في مجلد منعزل قبل تشغيله',
   sn02:'الترخيص',st02:'تفعيل',se02:'الترخيص',si02:'الترخيص نظام حماية مرتبط بجهازك. بمجرد التفعيل يُقفل على بصمة جهازك الفريدة ولا يمكن نقله لجهاز آخر دون تواصل مع الدعم.',
   lh_t:'كيف تحصل على مفتاح الترخيص؟',lh_d:'تواصل مع الدعم الفني على WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>أرسل <strong>Machine ID (HWID)</strong> الخاص بجهازك. ستتلقى مفتاح ترخيص Base64 تلصقه في حقل التفعيل.',
   l1t:'ابحث عن Machine ID',l1d:'في نافذة الترخيص ستجد HWID مكون من 16 حرف. انقر "نسخ معرّف الجهاز" ثم أرسله.',
@@ -762,7 +712,7 @@ ar:{dir:'rtl',fam:'Cairo',
   ps7b:'بعد كل عملية ناجحة يحفظ البرنامج الفروقات في <code>diff_learning.db</code> لتوليد سكريبتات JSON تلقائية.',
   ps7tip:'كلما تكررت العملية على نفس المتغير، كلما زادت درجة الثقة وأصبح البرنامج يقترح السكريبت تلقائياً.',
   st04:'المرحلة 1',si04:'البرنامج يبحث عن مراسٍ نصية وثنائية لتحديد نوع الـ ECU. هذه المرحلة أساسية لتطابق السكريبتات تلقائياً.',
-  s04tip:'انقر "Scan SW IDs" في Script Engine لعرض جميع المعرّفات المكتشفة في الملف. اختر الأنسب للمطابقة.',
+  s04tip:'انقر "Scan SW IDs" في Script Engine لعرض جميع المعرّدات المكتشفة في الملف. اختر الأنسب للمطابقة.',
   st05:'المرحلة 2',si05:'الكشف التلقائي عن DPF وEGR وSCR وIMMO باستخدام توقيعات ثنائية ونصية متعددة. يُشغَّل قبل أي تعديل.',
   s05w:'إذا أظهر "not detected" لميزة تعلم أنها موجودة، تحقق من أن الملف غير مشفر وحجمه صحيح.',
   st06:'المرحلة 7',si06:'كل تعديل مؤكد يُخزَّن في قاعدة البيانات ويُولَّد منه سكريبت JSON جاهز للاستخدام المستقبلي على نفس المتغير.',
@@ -819,7 +769,7 @@ ar:{dir:'rtl',fam:'Cairo',
   q2:'خطأ "Patch validation failed"',a2:'البايتات في الإزاحة لا تطابق حقل Find. الملف معدَّل مسبقاً، أو الإزاحة خاطئة، أو إصدار مختلف.',
   q3:'كيف أعرف أن الملف المعدَّل سليم؟',a3:'قارن بـ Diff Viewer. Entropy يجب أن يكون قريباً من الأصلي (فرق أقل من 0.1). اختبر على الديناميك أولاً.',
   q4:'غيّرت جهازي — كيف أنقل الترخيص؟',a4:'أرسل HWID الجهاز الجديد للدعم الفني على +970 595 438 486. ستستلم مفتاحاً جديداً.',
-  q5:'البرنامج لا يفتح — خطأ Python',a5:'تحقق: أن النظام المثبت لديك هو Win10/11 وأن Ram 4G على الاقل وأن هناك مساحة تخزين كافية.',
+  q5:'البرنامج لا يفتح',a5:'تحقق: أن النظام المثبت لديك هو Win10/11 وأن Ram 4G على الاقل وأن هناك مساحة تخزين كافية.',
   q6:'كيف أضيف متغير ECU جديد؟',a6:'تواصل مع الدعم الفني مع الإزاحات الضرورية. أو اكتب سكريبت JSON مخصص في Script Engine.',
   sn24:'الدعم',st24:'التواصل مع',se24:'الدعم الفني',si24:'الدعم متاح 24/7. أرسل هذه المعلومات لتسريع الحل.',
   sup_cl_t:'ما ترسله عند طلب الدعم',sup_cl:'1. Machine ID (HWID)<br>2. متغير ECU (مثلاً EDC17C10)<br>3. وصف المشكلة بالتفصيل<br>4. رسالة الخطأ كاملة من السجل<br>5. ملف BIN (اختياري لكن يسرّع كثيراً)',
@@ -827,9 +777,9 @@ ar:{dir:'rtl',fam:'Cairo',
 },
 en:{dir:'ltr',fam:'Inter',
   dl_btn:'Download Software',hero_badge:'Official Complete Guide',hero_title:'Detailed User Manual',
-  hero_desc:'A comprehensive guide for every tab, feature, and option. Suitable for beginners and professionals. Read this guide before working on any BIN file.',
+  hero_desc:'A comprehensive guide for every tab, feature, and option. Suitable for beginners and professionals.',
   stat_sec:'Sections',stat_pip:'Pipeline Stages',stat_tabs:'Functional Tabs',
-  dl_title:'Download ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · Python 3.10+ · Contact to get your copy',
+  dl_title:'Download ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · Contact to get your copy',
   sb_s0:'Getting Started',sb_00:'Introduction & Overview',sb_01:'Installation & Launch',sb_02:'License Activation',
   sb_s1:'Pipeline — 7 Stages',sb_03:'Understanding Pipeline',sb_04:'Stage 1 — SW ID',sb_05:'Stage 2 — Feature Detection',sb_06:'Stage 7 — Diff Learning',
   sb_s2:'Program Tabs',sb_07:'Analysis Tab',sb_08:'Fuel Maps',sb_09:'Boost Map',
@@ -842,14 +792,14 @@ en:{dir:'ltr',fam:'Inter',
   f4t:'Diff Learning',f4d:'Store modifications and generate automatic scripts for future use',
   f5t:'Script Engine',f5d:'Execute custom pattern-based modifications with contextual verification',
   f6t:'Business CRM',f6d:'Complete customer database and job logging with CSV export',
-  sys_req_t:'System Requirements:',sys_req:'Windows 10/11 (64-bit) · Python 3.10+ · PyQt6 · 4GB RAM · 500MB',
-  sn01:'Installation',st01:'How to',se01:'Run the Program',si01:'No traditional installation required. Runs directly from its folder with Python and PyQt6 installed.',
+  sys_req_t:'System Requirements:',sys_req:'Windows 10/11 (64-bit) · 4GB RAM · 500MB',
+  sn01:'Installation',st01:'How to',se01:'Run the Program',si01:'No traditional installation required. Runs directly from its folder.',
   in1t:'Place files in one folder',in1d:'Put all files in a folder like <code>C:\\ECU_Pro\\</code>. Ensure write permissions.',
-  in2t:'Install requirements',in2d:'Open Command Prompt and run:',in3t:'Run the program',in3d:'From the same folder run:',
+  in2t:'Extract the archive',in2d:'Use any archive extraction tool:',in3t:'Run the program',in3d:'From the same folder run:',
   warn_note:'Note:',in_warn:'On first run, the program creates: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> and <code>.db</code> databases. Do not delete these.',
-  tip_note:'Tip:',in_tip:'Create a <code>run.bat</code> file with <code>python ecu_intel_v5.py</code> for double-click launch.',
+  tip_note:'Tip:',in_tip:'Place the program and its files in an isolated folder before running.',
   sn02:'License',st02:'Activate',se02:'the License',si02:'The license is tied to your device. Once activated, it locks to your device fingerprint and cannot be transferred without contacting support.',
-  lh_t:'How to get a license key?',lh_d:'Contact Fares Mansour on WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Send your <strong>Machine ID (HWID)</strong>. You will receive a Base64 license key.',
+  lh_t:'How to get a license key?',lh_d:'Contact support on WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Send your <strong>Machine ID (HWID)</strong>. You will receive a Base64 license key.',
   l1t:'Find your Machine ID',l1d:'In the license window you\'ll find a 16-character HWID. Click "Copy Machine ID" then send it.',
   l2t:'Receive the key',l2d:'The key is Base64 format starting with <code>eyJ...</code> — copy it completely without spaces.',
   l3t:'Activate the license',l3d:'Paste the key in the field, click "Activate License". A green message confirms success.',
@@ -921,35 +871,35 @@ en:{dir:'ltr',fam:'Inter',
   sn22:'Safety',se22:'Built-in Safety Limits',si22:'The program monitors these limits in every tuning operation and warns when exceeded.',
   sf_p:'Parameter',sf_m:'Maximum Safe Limit',sf_e:'When Exceeded',sf1:'Warning in log',sf2:'Warning + red cell',sf3:'Warning in Stage log',sf4:'Stage 2/3 monitoring',
   sfw_t:'General Warning:',sfw_d:'Always save a backup. The program saves automatically to <code>output/backups/</code> but keep an external copy too.',
-  bp_t:'Best Practices:',bp_d:'Test on dyno first. Always start with Stage 1. Stage 3 requires injectors, pump, and turbo upgrade.',
+  bp_t:'Best Practices:',bp_d:'Test on dyno first. Always start with Stage 1. Stage 3 requires filters, pump and turbo upgrade.',
   se23:'Frequently Asked Questions',si23:'Answers to the most frequently asked questions.',
   q1:'Program does not recognize ECU variant',a1:'Use Override Variant to select manually. Verify the file is valid and not encrypted. Search Hex View for variant name.',
   q2:'"Patch validation failed" error',a2:'Bytes at offset do not match Find field. File may be pre-patched, wrong offset, or different version.',
   q3:'How do I verify the modified file is valid?',a3:'Compare with Diff Viewer. Entropy should be close to original (< 0.1 difference). Test on dyno first.',
-  q4:'I changed my PC — how to transfer license?',a4:'Send the new device HWID to Fares Mansour at +970 595 438 486. You\'ll receive a new key.',
-  q5:'Program won\'t open — Python error',a5:'Check: Python ≥ 3.10 (<code>python --version</code>). PyQt6 installed (<code>pip install PyQt6</code>). Run CMD as Administrator.',
-  q6:'How to add a new ECU variant?',a6:'Contact Fares Mansour with the necessary offsets. Or write a custom JSON script in Script Engine.',
+  q4:'I changed my PC — how to transfer license?',a4:'Send the new device HWID to support at +970 595 438 486. You\'ll receive a new key.',
+  q5:'Program won\'t open',a5:'Check: your system is Win10/11, at least 4GB RAM, and sufficient storage space.',
+  q6:'How to add a new ECU variant?',a6:'Contact support with the necessary offsets. Or write a custom JSON script in Script Engine.',
   sn24:'Support',st24:'Contact',se24:'Technical Support',si24:'Support available 24/7. Send this information to speed up resolution.',
   sup_cl_t:'What to send when requesting support',sup_cl:'1. Machine ID (HWID)<br>2. ECU variant (e.g. EDC17C10)<br>3. Detailed problem description<br>4. Full error message from log<br>5. BIN file (optional but speeds up resolution)',
-  dev_name:'Fares Mansour',call_btn:'Call',avail:'● Available 24 / 7',copy:'Copy',search_ph:'Search the guide...'
+  dev_name:'Technical Support',call_btn:'Call',avail:'● Available 24 / 7',copy:'Copy',search_ph:'Search the guide...'
 },
 fr:{dir:'ltr',fam:'Inter',
   dl_btn:'Télécharger',hero_badge:'Guide officiel complet',hero_title:'Manuel d\'utilisation détaillé',
   hero_desc:'Guide complet pour chaque onglet, fonctionnalité et option. Convient aux débutants et professionnels.',
   stat_sec:'Sections',stat_pip:'Étapes Pipeline',stat_tabs:'Onglets',
-  dl_title:'Télécharger ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · Python 3.10+ · Contactez pour votre copie',
+  dl_title:'Télécharger ECU Intelligence Pro v5',dl_meta:'Windows 10/11 · Contactez pour votre copie',
   sb_s0:'Démarrage',sb_00:'Introduction',sb_01:'Installation',sb_02:'Activation licence',sb_s1:'Pipeline — 7 étapes',sb_03:'Comprendre le Pipeline',sb_04:'Étape 1 — SW ID',sb_05:'Étape 2 — Détection',sb_06:'Étape 7 — Diff Learning',
   sb_s2:'Onglets',sb_07:'Onglet Analyse',sb_08:'Cartes carburant',sb_09:'Carte Boost',sb_s3:'Avancé',sb_21:'Scripts',sb_22:'Sécurité',sb_23:'FAQ',sb_24:'Support',
   sn00:'Introduction',st00:'Vue d\'ensemble du',se00:'logiciel',si00:'ECU Intelligence Pro v5 est un logiciel spécialisé pour analyser et calibrer les fichiers BIN des calculateurs. Basé sur 7 étapes séquentielles garantissant précision et sécurité.',
   f1t:'Analyse BIN',f1d:'Lecture et analyse des fichiers ECU binaires avec extraction complète',f2t:'Détection fonctions ECU',f2d:'Détecter automatiquement DPF/EGR/SCR/IMMO avant toute modification',
   f3t:'Réglage Stage 1/2/3',f3d:'Optimisation en trois niveaux avec limites de sécurité',f4t:'Apprentissage Diff',f4d:'Stocker les modifications et générer des scripts automatiques',
   f5t:'Moteur de scripts',f5d:'Exécuter des modifications avec vérification contextuelle',f6t:'CRM Clients',f6d:'Base de données clients avec export CSV',
-  sys_req_t:'Configuration requise:',sys_req:'Windows 10/11 (64-bit) · Python 3.10+ · PyQt6 · 4Go RAM · 500Mo',
+  sys_req_t:'Configuration requise:',sys_req:'Windows 10/11 (64-bit) · 4Go RAM · 500Mo',
   sn01:'Installation',st01:'Comment',se01:'lancer le logiciel',si01:'Aucune installation traditionnelle requise. Fonctionne directement depuis son dossier.',
-  in1t:'Placer les fichiers dans un dossier',in1d:'Placez tous les fichiers dans <code>C:\\ECU_Pro\\</code>.',in2t:'Installer les prérequis',in2d:'Ouvrez l\'invite et exécutez:',in3t:'Lancer',in3d:'Depuis le même dossier:',
-  warn_note:'Note:',in_warn:'Au premier lancement, le programme crée: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> et bases <code>.db</code>.',tip_note:'Conseil:',in_tip:'Créez un <code>run.bat</code> avec <code>python ecu_intel_v5.py</code> pour lancement en double-clic.',
+  in1t:'Placer les fichiers dans un dossier',in1d:'Placez tous les fichiers dans <code>C:\\ECU_Pro\\</code>.',in2t:'Extraire l\'archive',in2d:'Utilisez n\'importe quel outil d\'extraction:',in3t:'Lancer',in3d:'Depuis le même dossier:',
+  warn_note:'Note:',in_warn:'Au premier lancement, le programme crée: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> et bases <code>.db</code>.',tip_note:'Conseil:',in_tip:'Placez le programme et ses fichiers dans un dossier isolé avant de le lancer.',
   sn02:'Licence',st02:'Activer',se02:'la Licence',si02:'La licence est liée à votre appareil. Une fois activée, elle ne peut être transférée sans contacter le support.',
-  lh_t:'Comment obtenir une clé?',lh_d:'Contactez Fares Mansour sur WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Envoyez votre <strong>Machine ID (HWID)</strong>.',
+  lh_t:'Comment obtenir une clé?',lh_d:'Contactez le support sur WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Envoyez votre <strong>Machine ID (HWID)</strong>.',
   l1t:'Trouver le Machine ID',l1d:'Dans la fenêtre de licence, trouvez le HWID de 16 caractères.',l2t:'Recevoir la clé',l2d:'Clé Base64 commençant par <code>eyJ...</code>.',l3t:'Activer',l3d:'Collez la clé et cliquez "Activer". Message vert = succès.',l4t:'Confirmer',l4d:'Licence sauvegardée dans <code>licenses.db</code>.',
   lic_stat:'Statut',lic_mean:'Signification',lic_sol:'Solution',lv_valid:'Actif et valide',lv_exp:'Expiré',ls_exp:'Contactez le support',lv_wm:'Lié à un autre appareil',ls_wm:'Envoyez le nouvel HWID',lv_inv:'Clé corrompue',ls_inv:'Nouvelle clé',lv_mal:'Mauvais format',ls_mal:'Vérifiez la copie',
   sn03:'Pipeline',st03:'Comprendre',se03:'le Pipeline 7 étapes',si03:'Chaque pression sur Analyser fait passer le BIN par 7 étapes séquentielles.',
@@ -976,22 +926,24 @@ fr:{dir:'ltr',fam:'Inter',
   sn21:'Scripts',st21:'Écrire',se21:'Scripts JSON personnalisés',si21:'Scripts JSON de zéro ou modifier existants.',sc_save_t:'Emplacement:',sc_save:'Dossier <code>scripts/</code>. Utilisez "↻ Reload".',
   sn22:'Sécurité',se22:'Limites de sécurité',si22:'Limites surveillées à chaque réglage.',sf_p:'Paramètre',sf_m:'Limite max',sf_e:'Si dépassé',sf1:'Avertissement log',sf2:'Avertissement + rouge',sf3:'Avertissement Stage',sf4:'Surveillance Stage 2/3',
   sfw_t:'Avertissement:',sfw_d:'Toujours sauvegarder. Programme sauvegarde dans <code>output/backups/</code>.',bp_t:'Bonnes pratiques:',bp_d:'Testez sur banc. Commencez Stage 1. Stage 3 = mise à niveau requise.',
-  se23:'FAQ',si23:'Questions fréquentes.',q1:'Programme ne reconnaît pas la variante',a1:'Utilisez Override Variant. Vérifiez le fichier.',q2:'Patch validation failed',a2:'Octets ne correspondent pas.',q3:'Vérifier fichier modifié?',a3:'Diff Viewer. Entropy proche original.',q4:'Transfert licence?',a4:'Envoyez HWID à +970 595 438 486.',q5:'Programme ne s\'ouvre pas',a5:'Python ≥ 3.10. pip install PyQt6. Admin.',q6:'Nouvelle variante ECU?',a6:'Contactez Fares Mansour.',
-  sn24:'Support',st24:'Contacter',se24:'Support Technique',si24:'Support 24/7.',sup_cl_t:'Informations à envoyer',sup_cl:'1. HWID<br>2. Variante ECU<br>3. Description<br>4. Erreur<br>5. BIN (optionnel)',dev_name:'Fares Mansour',call_btn:'Appeler',avail:'● Disponible 24/7',copy:'Copier',search_ph:'Rechercher...'
+  se23:'FAQ',si23:'Questions fréquentes.',q1:'Programme ne reconnaît pas la variante',a1:'Utilisez Override Variant. Vérifiez le fichier.',q2:'Patch validation failed',a2:'Octets ne correspondent pas.',q3:'Vérifier fichier modifié?',a3:'Diff Viewer. Entropy proche original.',q4:'Transfert licence?',a4:'Envoyez HWID à +970 595 438 486.',
+  q5:'Programme ne s\'ouvre pas',a5:'Vérifiez: système Win10/11, au moins 4Go RAM, espace de stockage suffisant.',
+  q6:'Nouvelle variante ECU?',a6:'Contactez le support avec les offsets nécessaires.',
+  sn24:'Support',st24:'Contacter',se24:'Support Technique',si24:'Support 24/7.',sup_cl_t:'Informations à envoyer',sup_cl:'1. HWID<br>2. Variante ECU<br>3. Description<br>4. Erreur<br>5. BIN (optionnel)',dev_name:'Support Technique',call_btn:'Appeler',avail:'● Disponible 24/7',copy:'Copier',search_ph:'Rechercher...'
 },
 de:{dir:'ltr',fam:'Inter',
   dl_btn:'Herunterladen',hero_badge:'Offizieller Leitfaden',hero_title:'Benutzerhandbuch',hero_desc:'Umfassender Leitfaden. Geeignet für Anfänger und Profis.',stat_sec:'Abschnitte',stat_pip:'Pipeline-Stufen',stat_tabs:'Tabs',
-  dl_title:'ECU Intelligence Pro v5 herunterladen',dl_meta:'Windows 10/11 · Python 3.10+ · Kontakt für Kopie',
+  dl_title:'ECU Intelligence Pro v5 herunterladen',dl_meta:'Windows 10/11 · Kontakt für Kopie',
   sb_s0:'Erste Schritte',sb_00:'Einführung',sb_01:'Installation',sb_02:'Lizenzaktivierung',sb_s1:'Pipeline — 7 Stufen',sb_03:'Pipeline verstehen',sb_04:'Stufe 1 — SW ID',sb_05:'Stufe 2 — Erkennung',sb_06:'Stufe 7 — Diff Learning',
   sb_s2:'Tabs',sb_07:'Analyse-Tab',sb_08:'Kraftstoffkarten',sb_09:'Boost-Karte',sb_s3:'Erweitert',sb_21:'Benutzerdefinierte Skripte',sb_22:'Sicherheitsgrenzen',sb_23:'FAQ',sb_24:'Support',
   sn00:'Einführung',st00:'Überblick über das',se00:'Programm',si00:'ECU Intelligence Pro v5 ist eine spezialisierte Software zur Analyse und Kalibrierung von ECU BIN-Dateien. Basierend auf 7-stufiger sequentieller Architektur.',
   f1t:'BIN-Datei-Analyse',f1d:'ECU-Binärdateien lesen und analysieren',f2t:'ECU-Erkennung',f2d:'Automatisch DPF/EGR/SCR/IMMO erkennen',f3t:'Auto-Tune Stufe 1/2/3',f3d:'Motoroptimierung in drei Stufen',f4t:'Diff-Lernen',f4d:'Änderungen speichern und Skripte generieren',f5t:'Skript-Engine',f5d:'Benutzerdefinierte Änderungen ausführen',f6t:'Kunden-CRM',f6d:'Vollständige Kundendatenbank',
-  sys_req_t:'Systemanforderungen:',sys_req:'Windows 10/11 (64-bit) · Python 3.10+ · PyQt6 · 4GB RAM · 500MB',
+  sys_req_t:'Systemanforderungen:',sys_req:'Windows 10/11 (64-bit) · 4GB RAM · 500MB',
   sn01:'Installation',st01:'Programm',se01:'starten',si01:'Keine traditionelle Installation erforderlich. Läuft direkt aus seinem Ordner.',
-  in1t:'Dateien in Ordner legen',in1d:'Alle Dateien in <code>C:\\ECU_Pro\\</code> ablegen.',in2t:'Anforderungen installieren',in2d:'Eingabeaufforderung öffnen und ausführen:',in3t:'Programm starten',in3d:'Aus demselben Ordner:',
-  warn_note:'Hinweis:',in_warn:'Beim ersten Start erstellt das Programm: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> und <code>.db</code> Datenbanken.',tip_note:'Tipp:',in_tip:'<code>run.bat</code> Datei mit <code>python ecu_intel_v5.py</code> erstellen.',
+  in1t:'Dateien in Ordner legen',in1d:'Alle Dateien in <code>C:\\ECU_Pro\\</code> ablegen.',in2t:'Archiv entpacken',in2d:'Verwenden Sie ein beliebiges Entpackungsprogramm:',in3t:'Programm starten',in3d:'Aus demselben Ordner:',
+  warn_note:'Hinweis:',in_warn:'Beim ersten Start erstellt das Programm: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> und <code>.db</code> Datenbanken.',tip_note:'Tipp:',in_tip:'Legen Sie das Programm und seine Dateien in einem isolierten Ordner ab, bevor Sie es starten.',
   sn02:'Lizenz',st02:'Lizenz',se02:'aktivieren',si02:'Die Lizenz ist an Ihr Gerät gebunden und kann ohne Support nicht übertragen werden.',
-  lh_t:'Lizenzschlüssel erhalten?',lh_d:'Fares Mansour auf WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Senden Sie Ihre <strong>Machine ID (HWID)</strong>.',
+  lh_t:'Lizenzschlüssel erhalten?',lh_d:'Support auf WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br>Senden Sie Ihre <strong>Machine ID (HWID)</strong>.',
   l1t:'Machine ID finden',l1d:'16-Zeichen HWID im Lizenzfenster. "ID kopieren" klicken.',l2t:'Schlüssel erhalten',l2d:'Base64-Schlüssel beginnt mit <code>eyJ...</code>.',l3t:'Lizenz aktivieren',l3d:'"Lizenz aktivieren" klicken. Grüne Nachricht = Erfolg.',l4t:'Bestätigen',l4d:'Lizenz in <code>licenses.db</code> gespeichert.',
   lic_stat:'Lizenzstatus',lic_mean:'Bedeutung',lic_sol:'Lösung',lv_valid:'Aktiv und gültig',lv_exp:'Abgelaufen',ls_exp:'Support kontaktieren',lv_wm:'An anderen Gerät gebunden',ls_wm:'Neue HWID senden',lv_inv:'Schlüssel beschädigt',ls_inv:'Neuen Schlüssel holen',lv_mal:'Falsches Format',ls_mal:'Vollständige Kopie prüfen',
   sn03:'Pipeline',st03:'Die 7-stufige',se03:'Pipeline verstehen',si03:'Jedes Mal, wenn Sie "Analysieren" drücken, durchläuft die BIN-Datei 7 Stufen.',
@@ -1019,22 +971,24 @@ de:{dir:'ltr',fam:'Inter',
   sn21:'Skripte',st21:'Benutzerdefinierte',se21:'JSON-Skripte schreiben',si21:'JSON-Skripte schreiben oder bestehende ändern.',sc_save_t:'Speicherort:',sc_save:'<code>scripts/</code> Ordner. "↻ Reload" verwenden.',
   sn22:'Sicherheit',se22:'Sicherheitsgrenzen',si22:'Grenzen werden überwacht und bei Überschreitung gewarnt.',sf_p:'Parameter',sf_m:'Maximale Grenze',sf_e:'Bei Überschreitung',sf1:'Warnung im Log',sf2:'Warnung + rote Zelle',sf3:'Warnung Stage-Log',sf4:'Stage 2/3 Überwachung',
   sfw_t:'Allgemeine Warnung:',sfw_d:'Immer Backup erstellen. Programm speichert in <code>output/backups/</code>.',bp_t:'Bewährte Praktiken:',bp_d:'Auf Prüfstand testen. Mit Stage 1 beginnen. Stage 3 erfordert Upgrade.',
-  se23:'Häufig gestellte Fragen',si23:'Antworten auf häufige Fragen.',q1:'Programm erkennt ECU-Variante nicht',a1:'Override Variant verwenden. Datei prüfen.',q2:'Patch validation failed',a2:'Bytes stimmen nicht überein.',q3:'Geänderte Datei prüfen?',a3:'Diff Viewer. Entropy nah am Original.',q4:'PC gewechselt?',a4:'Neue HWID an +970 595 438 486.',q5:'Programm öffnet nicht',a5:'Python ≥ 3.10. pip install PyQt6. Admin.',q6:'Neue Variante hinzufügen?',a6:'Fares Mansour kontaktieren.',
-  sn24:'Support',st24:'Technischen',se24:'Support kontaktieren',si24:'Support rund um die Uhr.',sup_cl_t:'Informationen für den Support',sup_cl:'1. HWID<br>2. ECU-Variante<br>3. Problembeschreibung<br>4. Fehlermeldung<br>5. BIN (optional)',dev_name:'Fares Mansour',call_btn:'Anrufen',avail:'● Verfügbar 24/7',copy:'Kopieren',search_ph:'Suchen...'
+  se23:'Häufig gestellte Fragen',si23:'Antworten auf häufige Fragen.',q1:'Programm erkennt ECU-Variante nicht',a1:'Override Variant verwenden. Datei prüfen.',q2:'Patch validation failed',a2:'Bytes stimmen nicht überein.',q3:'Geänderte Datei prüfen?',a3:'Diff Viewer. Entropy nah am Original.',q4:'PC gewechselt?',a4:'Neue HWID an +970 595 438 486.',
+  q5:'Programm öffnet nicht',a5:'Prüfen Sie: System ist Win10/11, mindestens 4GB RAM, ausreichend Speicherplatz.',
+  q6:'Neue Variante hinzufügen?',a6:'Support mit den notwendigen Offsets kontaktieren.',
+  sn24:'Support',st24:'Technischen',se24:'Support kontaktieren',si24:'Support rund um die Uhr.',sup_cl_t:'Informationen für den Support',sup_cl:'1. HWID<br>2. ECU-Variante<br>3. Problembeschreibung<br>4. Fehlermeldung<br>5. BIN (optional)',dev_name:'Technischer Support',call_btn:'Anrufen',avail:'● Verfügbar 24/7',copy:'Kopieren',search_ph:'Suchen...'
 },
 tr:{dir:'ltr',fam:'Inter',
   dl_btn:'İndir',hero_badge:'Resmi Tam Kılavuz',hero_title:'Ayrıntılı Kullanım Kılavuzu',hero_desc:'Her sekme, özellik ve seçenek için kapsamlı kılavuz.',stat_sec:'Bölümler',stat_pip:'Pipeline Aşamaları',stat_tabs:'Sekmeler',
-  dl_title:'ECU Intelligence Pro v5 İndir',dl_meta:'Windows 10/11 · Python 3.10+ · Kopya için iletişime geçin',
+  dl_title:'ECU Intelligence Pro v5 İndir',dl_meta:'Windows 10/11 · Kopya için iletişime geçin',
   sb_s0:'Başlangıç',sb_00:'Giriş ve Genel Bakış',sb_01:'Kurulum',sb_02:'Lisans Aktivasyonu',sb_s1:'Pipeline — 7 Aşama',sb_03:'Pipeline Anlama',sb_04:'Aşama 1 — SW ID',sb_05:'Aşama 2 — Özellik',sb_06:'Aşama 7 — Diff',
   sb_s2:'Sekmeler',sb_07:'Analiz Sekmesi',sb_08:'Yakıt Haritaları',sb_09:'Boost Haritası',sb_s3:'Gelişmiş',sb_21:'Script Yazma',sb_22:'Güvenlik',sb_23:'SSS',sb_24:'Destek',
   sn00:'Giriş',st00:'Programın',se00:'Genel Bakışı',si00:'ECU Intelligence Pro v5, araçlardaki ECU BIN dosyalarını analiz etmek için uzmanlaşmış bir yazılımdır. 7 aşamalı mimari ile güvenlik sağlanır.',
   f1t:'BIN Dosya Analizi',f1d:'ECU ikili dosyalarını analiz edin',f2t:'ECU Özellik Tespiti',f2d:'DPF/EGR/SCR/IMMO\'yu otomatik tespit edin',f3t:'Otomatik Ayar Stage 1/2/3',f3d:'Üç aşamada motor optimizasyonu',f4t:'Diff Öğrenme',f4d:'Değişiklikleri depolayın',f5t:'Script Motoru',f5d:'Özel değişiklikler yapın',f6t:'Müşteri CRM',f6d:'Tam müşteri veritabanı',
-  sys_req_t:'Sistem Gereksinimleri:',sys_req:'Windows 10/11 (64-bit) · Python 3.10+ · PyQt6 · 4GB RAM · 500MB',
-  sn01:'Kurulum',st01:'Programı',se01:'Nasıl Çalıştırırsınız',si01:'Geleneksel kurulum gerekmez. Python ve PyQt6 ile doğrudan klasöründen çalışır.',
-  in1t:'Dosyaları bir klasöre koyun',in1d:'Tüm dosyaları <code>C:\\ECU_Pro\\</code> gibi bir klasöre koyun.',in2t:'Gereksinimleri yükleyin',in2d:'Komut İstemi\'ni açın ve çalıştırın:',in3t:'Programı çalıştırın',in3d:'Aynı klasörden çalıştırın:',
-  warn_note:'Not:',in_warn:'İlk çalıştırmada program oluşturur: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> ve <code>.db</code> veritabanları.',tip_note:'İpucu:',in_tip:'<code>run.bat</code> dosyası oluşturun: <code>python ecu_intel_v5.py</code>.',
+  sys_req_t:'Sistem Gereksinimleri:',sys_req:'Windows 10/11 (64-bit) · 4GB RAM · 500MB',
+  sn01:'Kurulum',st01:'Programı',se01:'Nasıl Çalıştırırsınız',si01:'Geleneksel kurulum gerekmez. Doğrudan klasöründen çalışır.',
+  in1t:'Dosyaları bir klasöre koyun',in1d:'Tüm dosyaları <code>C:\\ECU_Pro\\</code> gibi bir klasöre koyun.',in2t:'Arşivi çıkartın',in2d:'Herhangi bir arşiv açma programı kullanın:',in3t:'Programı çalıştırın',in3d:'Aynı klasörden çalıştırın:',
+  warn_note:'Not:',in_warn:'İlk çalıştırmada program oluşturur: <code>output/</code>, <code>output/backups/</code>, <code>scripts/</code> ve <code>.db</code> veritabanları.',tip_note:'İpucu:',in_tip:'Programı çalıştırmadan önce program ve dosyalarını izole bir klasöre yerleştirin.',
   sn02:'Lisans',st02:'Lisansı',se02:'Etkinleştirin',si02:'Lisans cihazınıza bağlıdır. Destek olmadan başka cihaza aktarılamaz.',
-  lh_t:'Lisans anahtarı nasıl alınır?',lh_d:'Fares Mansour WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br><strong>Machine ID (HWID)</strong> gönderin.',
+  lh_t:'Lisans anahtarı nasıl alınır?',lh_d:'Destek WhatsApp: <strong dir="ltr">+970 595 438 486</strong><br><strong>Machine ID (HWID)</strong> gönderin.',
   l1t:'Machine ID bulun',l1d:'Lisans penceresinde 16 karakterlik HWID. "ID Kopyala"ya tıklayın.',l2t:'Anahtarı alın',l2d:'<code>eyJ...</code> ile başlayan Base64 anahtarı.',l3t:'Etkinleştirin',l3d:'"Lisansı Etkinleştir"e tıklayın. Yeşil mesaj = başarı.',l4t:'Onaylayın',l4d:'Lisans <code>licenses.db</code>\'ye kaydedilir.',
   lic_stat:'Lisans Durumu',lic_mean:'Anlam',lic_sol:'Çözüm',lv_valid:'Aktif ve geçerli',lv_exp:'Süresi dolmuş',ls_exp:'Destek ile iletişime geçin',lv_wm:'Başka cihaza bağlı',ls_wm:'Yeni HWID gönderin',lv_inv:'Anahtar bozuk',ls_inv:'Yeni anahtar alın',lv_mal:'Yanlış format',ls_mal:'Tam kopyalandığını doğrulayın',
   sn03:'Pipeline',st03:'7 Aşamalı',se03:'Pipeline Anlama',si03:'Her "Analiz" tuşunda BIN dosyası 7 aşamadan geçer.',
@@ -1062,54 +1016,38 @@ tr:{dir:'ltr',fam:'Inter',
   sn21:'Script',st21:'Özel JSON',se21:'Script\'leri Yazma',si21:'Scriptleri sıfırdan yazın veya mevcut olanları değiştirin.',sc_save_t:'Kayıt yeri:',sc_save:'<code>scripts/</code> klasörü. "↻ Reload" kullanın.',
   sn22:'Güvenlik',se22:'Güvenlik Sınırları',si22:'Her ayar işleminde sınırlar izlenir.',sf_p:'Parametre',sf_m:'Maksimum Sınır',sf_e:'Aşıldığında',sf1:'Log uyarısı',sf2:'Uyarı + kırmızı hücre',sf3:'Stage log uyarısı',sf4:'Stage 2/3 izleme',
   sfw_t:'Genel Uyarı:',sfw_d:'Her zaman yedek alın. Program <code>output/backups/</code>\'a kaydeder.',bp_t:'İyi Uygulamalar:',bp_d:'Dinamometre testi yapın. Stage 1 ile başlayın. Stage 3 = yükseltme gerektirir.',
-  se23:'Sıkça Sorulan Sorular',si23:'En çok sorulan sorular.',q1:'Program ECU varyantını tanımıyor',a1:'Override Variant kullanın. Dosyayı kontrol edin.',q2:'Patch validation failed hatası',a2:'Baytlar eşleşmiyor.',q3:'Değiştirilen dosyayı doğrulama?',a3:'Diff Viewer. Entropy orijinaline yakın.',q4:'PC değiştirdim?',a4:'Yeni HWID\'i +970 595 438 486\'ya gönderin.',q5:'Program açılmıyor',a5:'Python ≥ 3.10. pip install PyQt6. Yönetici olarak çalıştır.',q6:'Yeni ECU varyantı?',a6:'Fares Mansour ile iletişime geçin.',
-  sn24:'Destek',st24:'Teknik',se24:'Destek İletişimi',si24:'7/24 destek.',sup_cl_t:'Destek için gerekli bilgiler',sup_cl:'1. HWID<br>2. ECU Varyantı<br>3. Sorun açıklaması<br>4. Hata mesajı<br>5. BIN dosyası (isteğe bağlı)',dev_name:'Fares Mansour',call_btn:'Ara',avail:'● 7/24 Mevcut',copy:'Kopyala',search_ph:'Ara...'
+  se23:'Sıkça Sorulan Sorular',si23:'En çok sorulan sorular.',q1:'Program ECU varyantını tanımıyor',a1:'Override Variant kullanın. Dosyayı kontrol edin.',q2:'Patch validation failed hatası',a2:'Baytlar eşleşmiyor.',q3:'Değiştirilen dosyayı doğrulama?',a3:'Diff Viewer. Entropy orijinaline yakın.',q4:'PC değiştirdim?',a4:'Yeni HWID\'i +970 595 438 486\'ya gönderin.',
+  q5:'Program açılmıyor',a5:'Kontrol edin: sistem Win10/11, en az 4GB RAM ve yeterli depolama alanı.',
+  q6:'Yeni ECU varyantı?',a6:'Gerekli offsetlerle destekle iletişime geçin.',
+  sn24:'Destek',st24:'Teknik',se24:'Destek İletişimi',si24:'7/24 destek.',sup_cl_t:'Destek için gerekli bilgiler',sup_cl:'1. HWID<br>2. ECU Varyantı<br>3. Sorun açıklaması<br>4. Hata mesajı<br>5. BIN dosyası (isteğe bağlı)',dev_name:'Teknik Destek',call_btn:'Ara',avail:'● 7/24 Mevcut',copy:'Kopyala',search_ph:'Ara...'
 }
 };
 
-// ═══════════════════════════════════════════
-// APPLY LANGUAGE
-// ═══════════════════════════════════════════
 let currentLang = 'ar';
 
 function applyLang(lang) {
   const t = T[lang];
   if (!t) return;
   currentLang = lang;
-
-  // Set document attributes
   document.documentElement.setAttribute('data-lang', lang);
   document.documentElement.setAttribute('lang', lang);
   document.documentElement.setAttribute('dir', t.dir);
   document.title = 'ECU Intelligence Pro v5 — ' + (lang === 'ar' ? 'دليل المستخدم' : lang === 'fr' ? 'Guide Utilisateur' : lang === 'de' ? 'Benutzerhandbuch' : lang === 'tr' ? 'Kullanım Kılavuzu' : 'User Guide');
-
-  // Update all elements with data-k attribute
   document.querySelectorAll('[data-k]').forEach(el => {
     const k = el.getAttribute('data-k');
     if (t[k] !== undefined) el.innerHTML = t[k];
   });
-
-  // Update search placeholder
   const si = document.getElementById('searchInput');
   if (si) si.placeholder = t.search_ph || '';
-
-  // Update copy buttons text (if not showing checkmark)
   document.querySelectorAll('.cb-copy').forEach(btn => {
     if (btn.textContent !== '✓') btn.textContent = t.copy || 'Copy';
   });
-
-  // Update lang buttons
   document.querySelectorAll('.lb').forEach(b => {
     b.classList.toggle('active', b.getAttribute('data-l') === lang);
   });
-
-  // Close mobile sidebar
   closeSidebar();
 }
 
-// ═══════════════════════════════════════════
-// MOBILE SIDEBAR
-// ═══════════════════════════════════════════
 const ham = document.getElementById('tbHam');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sb-overlay');
@@ -1127,9 +1065,6 @@ ham.addEventListener('click', () => {
 });
 overlay.addEventListener('click', closeSidebar);
 
-// ═══════════════════════════════════════════
-// SCROLL PROGRESS + BTT
-// ═══════════════════════════════════════════
 window.addEventListener('scroll', () => {
   const h = document.documentElement;
   const pct = Math.round((h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100) || 0;
@@ -1138,9 +1073,6 @@ window.addEventListener('scroll', () => {
   document.getElementById('btt').classList.toggle('show', h.scrollTop > 400);
 });
 
-// ═══════════════════════════════════════════
-// REVEAL ON SCROLL
-// ═══════════════════════════════════════════
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); }
@@ -1148,9 +1080,6 @@ const revObs = new IntersectionObserver(entries => {
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
-// ═══════════════════════════════════════════
-// SIDEBAR ACTIVE ON SCROLL
-// ═══════════════════════════════════════════
 const sections = document.querySelectorAll('.doc-sec[id]');
 const sbItems = document.querySelectorAll('.sb-item[data-sec]');
 const ioSb = new IntersectionObserver(entries => {
@@ -1171,9 +1100,6 @@ sbItems.forEach(a => {
   });
 });
 
-// ═══════════════════════════════════════════
-// TOGGLE STEP / FAQ
-// ═══════════════════════════════════════════
 function toggleStep(header) {
   header.closest('.step-card').classList.toggle('open');
 }
@@ -1181,15 +1107,11 @@ function toggleFaq(header) {
   header.closest('.faq-item').classList.toggle('open');
 }
 
-// ═══════════════════════════════════════════
-// COPY CODE
-// ═══════════════════════════════════════════
 document.querySelectorAll('.cb-copy').forEach(btn => {
   btn.addEventListener('click', function() {
     const pre = this.closest('.cb').querySelector('pre');
     if (!pre) return;
     navigator.clipboard.writeText(pre.innerText).then(() => {
-      const orig = this.textContent;
       this.textContent = '✓';
       this.style.color = 'var(--green)';
       this.style.borderColor = 'var(--green)';
@@ -1202,9 +1124,6 @@ document.querySelectorAll('.cb-copy').forEach(btn => {
   });
 });
 
-// ═══════════════════════════════════════════
-// SEARCH
-// ═══════════════════════════════════════════
 document.getElementById('searchInput').addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
   if (!q) return;
@@ -1217,16 +1136,10 @@ document.getElementById('searchInput').addEventListener('input', function() {
   }
 });
 
-// ═══════════════════════════════════════════
-// LANG BUTTONS
-// ═══════════════════════════════════════════
 document.querySelectorAll('.lb').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.getAttribute('data-l')));
 });
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
 applyLang('ar');
 </script>
 </body>
